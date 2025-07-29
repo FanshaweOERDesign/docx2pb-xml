@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <title>DOCX to Pressbooks XML Converter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <link rel="shortcut icon" href="images/oer_logo.ico" />
+    <link rel="shortcut icon" href="images/oer_logo.ico" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -131,20 +131,33 @@
         #help-modal {
             display: none;
             position: fixed;
-            top: 20em;
+            top: 10em;
             left: 50%;
             transform: translateX(-50%);
-            width: 60%;
-            height: 80%;
+            width: 40%;
+            height: 40%;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             overflow-y: auto;
             z-index: 1000;
             padding: 20px;
+            border: 2px double black;
 
             h2 {
                 text-align: center;
+            }
+
+            button {
+                margin: 1.5rem auto;
+                padding: 0.7rem 1.5rem;
+                background: #0074d9;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background 0.2s;
             }
         }
     </style>
@@ -181,17 +194,27 @@
     </footer>
     <div id="help-modal">
         <h2>How to Use</h2>
-        <p>This app assumes that the input provided will be a .docx file representing a part to be added to Pressbooks with sub-chapters identified by Heading1 titles within the document. To use the app:</p>
+        <p>This app assumes that the input provided will be a .docx file representing a part to be added to Pressbooks
+            with sub-chapters identified by Heading1 titles within the document. To use the app:</p>
         <ol>
             <li>Enter the title for your Pressbooks part/chapter</li>
-            <li>Enter a sample image URL from your Pressbook. This can be the URL of any image already added to the Media Library of your Pressbook, and is required for the app to process the images in your Word doc so that they will display on your generated Pressbooks pages.</li>
-            <li>Drag and drop or use the file explorer to upload your Word file. A download button and preview of the file should appear below the file drop zone.</li>
-            <li>Click the download button. A zip archive entitled <em>project</em> will download. Within this archive is an XML file (<em>pressbooks.xml</em>) and an images folder containing any extracted images.</li>
-            <li>Upload the images to you Pressbook Media Library. This can be done quickly by selecting all of the contents of the downloaded images folder and dragging the contents into the Media Library file uploader.</li>
-            <li>Navigate to <strong>Import</strong> in Pressbooks. Select <strong>PressbooksXML</strong> for upload type and select the downloaded <em>pressbooks.xml</em> file, and click the button to begin the import. On the next page, select all of the items and import them.</li>
+            <li>Enter a sample image URL from your Pressbook. This can be the URL of any image already added to the
+                Media Library of your Pressbook, and is required for the app to process the images in your Word doc so
+                that they will display on your generated Pressbooks pages.</li>
+            <li>Drag and drop or use the file explorer to upload your Word file. A download button and preview of the
+                file should appear below the file drop zone.</li>
+            <li>Click the download button. A zip archive entitled <em>project</em> will download. Within this archive is
+                an XML file (<em>pressbooks.xml</em>) and an images folder containing any extracted images.</li>
+            <li>Upload the images to you Pressbook Media Library. This can be done quickly by selecting all of the
+                contents of the downloaded images folder and dragging the contents into the Media Library file uploader.
+            </li>
+            <li>Navigate to <strong>Import</strong> in Pressbooks. Select <strong>PressbooksXML</strong> for upload type
+                and select the downloaded <em>pressbooks.xml</em> file, and click the button to begin the import. On the
+                next page, select all of the items and import them.</li>
             <li>The new part/chapter with its subsections will be added to your Pressbook.</li>
         </ol>
-        <button id="close-help" onclick="document.getElementById('help-modal').style.display='none'; return false;">Close</button>
+        <button id="close-help"
+            onclick="document.getElementById('help-modal').style.display='none'; return false;">Close</button>
     </div>
     <script src="./jszip.min.js"></script>
     <script src="./docx-preview.js"></script>
