@@ -1,0 +1,1598 @@
+<div xmlns="http://www.w3.org/1999/xhtml" id="preview" style="display:none;">
+    <!--docxjs library predefined styles--><!--docxjs document theme values--><!--docxjs document styles--><!--docxjs document numbering styles-->
+    <div class="docx-wrapper">
+        <section class="docx">
+            <article>
+                <p class="docx_title">Chapter 17- Reliability and Maintenance</p>
+                <p></p>
+                <p></p>
+                <p class="docx_heading1">Learning Outcomes</p>
+                <p>By the end of this chapter, students should be able to:</p>
+                <ul>
+                    <li>Define reliability and maintenance in the context of operations management and explain their
+                        importance to organizational performance.</li>
+                    <li>Calculate system reliability using formulas for both series and parallel configurations, and
+                        interpret the implications of adding redundancy.</li>
+                    <li>Differentiate between key maintenance strategies: reactive, preventive, predictive,
+                        condition-based, reliability-centred, and risk-based maintenance.</li>
+                    <li>Assess the advantages and disadvantages of different maintenance strategies for a variety of
+                        assets.</li>
+                    <li>Analyze the cost implications (direct and opportunity) of various maintenance policies and their
+                        impact on operations.</li>
+                    <li>Apply historical breakdown data to estimate expected costs and advise on optimal maintenance
+                        strategies.</li>
+                    <li>Evaluate opportunity costs related to downtime and their effect on decision-making for
+                        maintenance investment.</li>
+                    <li>Solve practical problems involving maintenance scheduling and reliability calculations.</li>
+                </ul>
+                <p></p>
+                <p class="docx_heading1">Introduction</p>
+                <p>As discussed in Chapter 4, <span style="font-weight: bold">reliability</span> and <span
+                        style="font-weight: bold">consistent performance</span> are critical considerations in the
+                    design of new products. Whether a product is <span
+                        style="font-weight: bold">repairable</span> (e.g., a stove) or <span
+                        style="font-weight: bold">non-repairable</span> (e.g., a light bulb), its <span
+                        style="font-weight: bold">total life cycle cost</span> and <span
+                        style="font-weight: bold">acquisition cost</span> are significantly influenced by how long it
+                    operates without failure—in other words, by its <span style="font-weight: bold">reliability</span>.
+                </p>
+                <p>Even in service-oriented businesses, operational success depends heavily on the performance of
+                    machinery, equipment, and other physical assets. The uninterrupted functioning of these assets is
+                    essential, and this can only be ensured through effective <span
+                        style="font-weight: bold">maintenance practices</span>.</p>
+                <p>Reliability and maintenance are, therefore, foundational elements of <span
+                        style="font-weight: bold">operations management</span>, directly impacting a firm’s efficiency,
+                    service quality, and return on investment. This chapter delves into these concepts in detail,
+                    supported by numerical examples and practical applications to illustrate their relevance in
+                    real-world operational contexts.</p>
+                <p class="docx_heading1">Concept and Definition of Reliability </p>
+                <p><span style="font-weight: bold">Reliability</span> refers to the probability that a machine, product,
+                    or system will perform its intended function without failure over a specified period under stated
+                    operating conditions. The emphasis on “specified time” is crucial—it reflects the idea of <span
+                        style="font-weight: bold">quality sustained over time</span>. In practical terms, when we
+                    design, produce, or use products, we expect them to maintain a consistent level of performance
+                    throughout their expected lifespan.</p>
+                <p>Reliability is not limited to individual components; it extends to entire systems. A <span
+                        style="font-weight: bold">system</span> typically comprises multiple <span
+                        style="font-weight: bold">subsystems</span>, each made up of individual components. The overall
+                    reliability of a system depends on the reliability of its constituent parts. In many cases,
+                    especially when components are arranged in series, the system’s reliability is the <span
+                        style="font-weight: bold">product of the reliabilities of its components</span>. This
+                    interdependence highlights the importance of designing and maintaining each part to ensure the
+                    system functions as intended.</p>
+                <p>Reliability is a key performance metric in both manufacturing and service operations, influencing
+                    product quality, customer satisfaction, and operational efficiency.</p>
+                <p class="docx_heading2">System Reliability</p>
+                <p>In operations management and engineering design, <span style="font-weight: bold">system
+                        reliability</span> refers to the likelihood that an entire system will function without failure
+                    over a specified period. For a system composed of n components arranged in <span
+                        style="font-weight: bold">series</span>, the system reliability is calculated as the product of
+                    the reliabilities of each individual component:</p>
+                <p style="text-align: center"><span style="font-weight: bold">R</span><span
+                        style="font-weight: bold"><sub>s</sub></span><span style="font-weight: bold"> = R</span><span
+                        style="font-weight: bold"><sub>1</sub></span><span style="font-weight: bold"> x R</span><span
+                        style="font-weight: bold"><sub>2</sub></span><span style="font-weight: bold"> x… x R</span><span
+                        style="font-weight: bold"><sub>n</sub></span></p>
+                <p><span style="font-weight: bold">Example:</span><br />Consider a system with four components arranged
+                    in series, where:</p>
+                <p>
+                <div><img
+                        alt="A black line with two rectangular objects&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/773881cc-8deb-48e2-803b-2bf983819c5e" id="docx-image-rId6"
+                        data-part-id="rId6" /></div>
+                </p>
+                <p>The system reliability is:</p>
+                <p>Rs = 0.9 × 0.8 × 0.6 × 0.4 = 0.1728</p>
+                <p>This means the system has a <span style="font-weight: bold">17.28%</span> chance of functioning
+                    without failure over the specified time period.</p>
+                <p>It is important to note that although each individual component has a relatively high reliability,
+                    the overall system reliability is significantly lower. This is because in a <span
+                        style="font-weight: bold">series configuration</span>, the system fails if <span
+                        style="font-weight: bold">any one component fails</span>. As more components are added in
+                    series, the probability of system failure increases, resulting in a decline in overall reliability.
+                </p>
+                <p>Figure illustrates how system reliability decreases as the number of components in series increases.
+                </p>
+                <p></p>
+                <p>
+                <div><img alt="Figure 2.Series system. Time course of reliability for various number of elements n."
+                        src="blob:http://192.168.0.104:8081/84223136-c647-430c-a27f-1272b43af50c" id="docx-image-rId7"
+                        data-part-id="rId7" /></div>
+                </p>
+                <p>(Menčík, 2016)</p>
+                <p>To counteract this decline, designers often introduce <span
+                        style="font-weight: bold">redundancy</span>—additional components or backup systems that can
+                    take over in case of failure. Redundancy can significantly improve system reliability, especially in
+                    critical applications.</p>
+                <p class="docx_heading2">Redundancy in System Reliability</p>
+                <p><span style="font-weight: bold">Redundancy</span> refers to the inclusion of additional or backup
+                    components in a system to enhance its overall reliability. In a redundant system, components are
+                    arranged in <span style="font-weight: bold">parallel</span>, meaning the system continues to
+                    function as long as <span style="font-weight: bold">at least one</span> of the parallel components
+                    is operational. The system only fails when <span style="font-weight: bold">all</span> redundant
+                    components fail.</p>
+                <p>Redundancy can involve one or more backup units. For example, an n-unit parallel system includes
+                    multiple components operating in parallel, any of which can sustain the system’s functionality.</p>
+                <p style="text-align: center">
+                <div><img alt="A diagram of a number of squares&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/5b78ed26-7a90-4f99-9511-eab307505918" id="docx-image-rId8"
+                        data-part-id="rId8" /></div>
+                </p>
+                <p>Dimitri Kececioglu <a
+                        href="https://www.globalspec.com/reference/75484/203279/chapter-2-reliability-of-parallel-systems">Chapter
+                        2: Reliability of Parallel Systems | GlobalSpec</a></p>
+                <p>The reliability of such systems is often calculated using the <span
+                        style="font-weight: bold">complement of unreliability</span>, expressed as:</p>
+                <p style="text-align: center">
+                <div><img alt="A black background with a black square&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/2ac23d87-7c25-4c17-9852-e1176080cca6" id="docx-image-rId10"
+                        data-part-id="rId10" /></div>
+                </p>
+                <p>Dimitri Kececioglu <a
+                        href="https://www.globalspec.com/reference/75484/203279/chapter-2-reliability-of-parallel-systems">Chapter
+                        2: Reliability of Parallel Systems | GlobalSpec</a></p>
+                <p style="text-align: center"></p>
+                <p></p>
+                <p>Where:</p>
+                <ul>
+                    <li>Rs​ is the system reliability,</li>
+                    <li>R(t) is the reliability of a single component over time t,</li>
+                    <li>n is the number of parallel components.</li>
+                </ul>
+                <p>This formula is derived using the <span style="font-weight: bold">Cumulative Distribution Function
+                        (CDF)</span>, which represents the probability of failure up to a given point in time.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Example 1: Two-Unit Parallel System</span></p>
+                <p>Consider a system with two identical pumps, each with a reliability of 0.7. The system will function
+                    as long as at least one pump is operational. The reliability of the system is calculated as:</p>
+                <p style="text-align: center"><span style="font-weight: bold">R</span><span
+                        style="font-weight: bold"><sub>s</sub></span><span style="font-weight: bold"> =</span><span
+                        style="font-weight: bold"> R</span><span style="font-weight: bold"><sub>1</sub></span><span
+                        style="font-weight: bold"> </span><span style="font-weight: bold">+ (</span><span
+                        style="font-weight: bold">R</span><span style="font-weight: bold"><sub>2</sub></span><span
+                        style="font-weight: bold">)(</span><span style="font-weight: bold"><sub> </sub></span><span
+                        style="font-weight: bold">1-</span><span style="font-weight: bold"><sub> </sub></span><span
+                        style="font-weight: bold">R</span><span style="font-weight: bold"><sub>1</sub></span><span
+                        style="font-weight: bold">)</span></p>
+                <p>Illustrating the above formula in more detail, </p>
+                <p><span style="font-weight: bold">
+                        <div><img
+                                alt="A black text on a white background&#10;&#10;AI-generated content may be incorrect."
+                                src="blob:http://192.168.0.104:8081/f5927baf-e1ce-4d05-ae7f-fa0f8d93441d"
+                                id="docx-image-rId12" data-part-id="rId12" /></div>
+                    </span></p>
+                <p>Substituting the values:</p>
+                <p><span style="font-weight: bold">R</span><span style="font-weight: bold"><sub>s</sub></span><span
+                        style="font-weight: bold"> =</span><span style="font-weight: bold"> R</span><span
+                        style="font-weight: bold"><sub>1</sub></span><span style="font-weight: bold"> </span><span
+                        style="font-weight: bold">+ (</span><span style="font-weight: bold">R</span><span
+                        style="font-weight: bold"><sub>2</sub></span><span style="font-weight: bold">)(</span><span
+                        style="font-weight: bold"><sub> </sub></span><span style="font-weight: bold">1-</span><span
+                        style="font-weight: bold"><sub> </sub></span><span style="font-weight: bold">R</span><span
+                        style="font-weight: bold"><sub>1</sub></span><span style="font-weight: bold">)</span></p>
+                <p>Rs ​= 0.7 + 0.7(1−0.7) = 0.7 + 0.21 = 0.91</p>
+                <p>Thus, the dual-pump system has a <span style="font-weight: bold">91%</span> chance of operating
+                    without failure, significantly higher than the reliability of a single pump.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Example 2: Redundancy in a Four-Component System</span></p>
+                <p>Let’s revisit the earlier four-component series system:</p>
+                <p><span style="font-weight: bold">
+                        <div><img alt="A diagram of a diagram&#10;&#10;AI-generated content may be incorrect."
+                                src="blob:http://192.168.0.104:8081/3b51e848-7cc2-4d33-b36b-d23e0c18c25e"
+                                id="docx-image-rId13" data-part-id="rId13" /></div>
+                    </span></p>
+                <p>Without redundancy, the system reliability was:</p>
+                <p>Rs ​= 0.9 × 0.8 × 0.6 × 0.4 = 0.1728 or 17.28%</p>
+                <p>Now, suppose <span style="font-weight: bold">R₂</span> and <span
+                        style="font-weight: bold">R₃</span> are each backed up by identical components (i.e., parallel
+                    redundancy). The new system reliability becomes:</p>
+                <p>Rs ​= R1 ​× [R2 ​+ R2 ​(1−R2​)] × [R3 ​+ R3 ​(1−R3​)] × R4​</p>
+                <p>Substituting the values:</p>
+                <p>Rs ​= 0.9 × [0.8 + 0.8 (1−0.8)] × [0.6 + 0.6 (1−0.6)] × 0.4 = 0.9 × 0.96 × 0.84 × 0.4 =
+                    0.2903 or 29.03%</p>
+                <p>This demonstrates a significant improvement in system reliability—from <span
+                        style="font-weight: bold">17.28% to 29.03%</span>—achieved by introducing redundancy in just two
+                    components. (Schenkelberg, 2025)</p>
+                <p class="docx_heading2">Interdependence in System Reliability</p>
+                <p><span style="font-weight: bold">Interdependence</span> refers to the relationships and dependencies
+                    among components or subsystems within a larger system. In interdependent systems, the failure of one
+                    component can trigger <span style="font-weight: bold">cascading failures</span> in others,
+                    increasing the system’s vulnerability. This phenomenon is particularly evident in complex systems
+                    such as <span style="font-weight: bold">weather models</span>, <span
+                        style="font-weight: bold">financial markets</span>, or <span style="font-weight: bold">power
+                        grids</span>, where changes follow <span style="font-weight: bold">stochastic
+                        patterns</span> and are often modelled using advanced tools like <span
+                        style="font-weight: bold">Markov Chains</span>. While such modelling is beyond the scope of this
+                    textbook, the concept of interdependence remains central to understanding system reliability.</p>
+                <p>Incorporating <span style="font-weight: bold">redundancy</span> into interdependent networks can
+                    mitigate the impact of cascading failures by providing alternative pathways or backup components,
+                    thereby enhancing overall system resilience.</p>
+                <p>In <span style="font-weight: bold">less complex systems</span>, interdependence can be analyzed by
+                    examining how failures propagate through a <span style="font-weight: bold">process chain</span>,
+                    affecting the final yield or performance. The following scenarios illustrate how interdependence
+                    influences reliability and how recovery mechanisms can improve outcomes.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Scenario 1: Interdependent Production Stages</span></p>
+                <p>Consider a production line with two consecutive stages:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Stage 1 Reliability</span>: 90%</li>
+                    <li><span style="font-weight: bold">Stage 2 Reliability</span>: 90% (if operating independently)
+                    </li>
+                </ul>
+                <p>However, if <span style="font-weight: bold">Stage 1 fails</span>, <span
+                        style="font-weight: bold">Stage 2</span> has only a <span style="font-weight: bold">40%
+                        chance</span> of success due to its dependency on Stage 1’s output.</p>
+                <p><span style="font-weight: bold">Independent Case (No Interdependence)</span></p>
+                <p>Rsind​​=0.9×0.9=0.81</p>
+                <p></p>
+                <p><span style="font-weight: bold">Interdependent Case</span></p>
+                <p>Let’s break down the probabilities:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Both stages succeed</span>:<br />0.9 × 0.9 = 0.81</li>
+                    <li><span style="font-weight: bold">Stage 1 </span><span
+                            style="font-weight: bold">succeeds,</span><span style="font-weight: bold"> Stage 2
+                            fails</span>:<br />0.9 × 0.1 = 0.09</li>
+                    <li><span style="font-weight: bold">Stage 1 </span><span
+                            style="font-weight: bold">fails,</span><span style="font-weight: bold"> Stage 2 succeeds
+                            (via rework)</span>:<br />0.1 × 0.4 = 0.04</li>
+                    <li><span style="font-weight: bold">Both stages fail</span>:<br />0.1 × 0.6 = 0.06</li>
+                </ul>
+                <p><span style="font-weight: bold">Total System Reliability (Interdependent)</span></p>
+                <p>Rs​=0.81+0.04=0.85</p>
+                <p>This example shows that <span style="font-weight: bold">recovery mechanisms</span>, such as rework or
+                    redundancy, can improve reliability even in interdependent systems. However, interdependence
+                    generally introduces complexity and potential fragility compared to fully independent systems.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Scenario 2: Wastewater Treatment Filter</span></p>
+                <p>In a wastewater treatment plant, a specialized filter is used to remove pathogens during peak flow
+                    hours. The system has the following characteristics:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Initial success rate</span>: 90%</li>
+                    <li><span style="font-weight: bold">Usability after peak flow</span>: 80%</li>
+                    <li><span style="font-weight: bold">Retrofit success rate</span>: 50% of usable filters</li>
+                    <li><span style="font-weight: bold">Fallback success rate</span>: 33% of non-retrofitted filters
+                    </li>
+                </ul>
+                <p style="text-align: center">
+                <div><img alt="null" src="blob:http://192.168.0.104:8081/7e230799-35c9-4fd9-bc31-95b431a0d492"
+                        id="docx-image-rId14" data-part-id="rId14" /></div>
+                </p>
+                <p>To determine the overall reliability, we analyze the <span style="font-weight: bold">network of
+                        dependencies</span>:</p>
+                <p>
+                <div><img alt="A diagram of a number&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/76592d47-7fa1-4bcd-a8b1-bd4955b1849c" id="docx-image-rId15"
+                        data-part-id="rId15" /></div>
+                </p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p><br />As shown below, the yield of the parallel components can be calculated</p>
+                <p style="text-align: center">
+                <div><img alt="A diagram of a number&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/c3116c19-c690-466f-a68c-1bad29f32242" id="docx-image-rId16"
+                        data-part-id="rId16" /></div>
+                </p>
+                <p>And with that calculation, three serial components exist whose collective yield is easily calculated
+                    as shown below</p>
+                <p style="text-align: center">
+                <div><img alt="A diagram of a number&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/03625bc3-f729-4f37-a320-ee261fd4f4a5" id="docx-image-rId17"
+                        data-part-id="rId17" /></div>
+                </p>
+                <p>Therefore, based on the above-mentioned interdependencies, this filter has a success probability of
+                    41.8% to remove the pathogens in an hour of peak flow. (Mahshid Rahnamay-Naeini, 2016)</p>
+                <p class="docx_heading1">Reliability Metrics</p>
+                <p>As introduced earlier in this chapter, <span style="font-weight: bold">reliability</span> is a
+                    measure of how consistently a system, product, or service performs its intended function without
+                    failure over a specified time period. To quantify this consistency—or its absence—sveral key <span
+                        style="font-weight: bold">reliability metrics</span> are used. These metrics help evaluate
+                    performance, identify areas for improvement, and guide design and maintenance decisions.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading2">1. Failure Rate Percentage (%)</p>
+                <p>This basic metric expresses the proportion of failed units relative to the total number tested,
+                    typically over a defined time period. It is calculated using the formula:</p>
+                <p style="text-align: center">
+                <div><img alt="A black text on a white background&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/d622b64b-0d84-49d8-8e1a-3f581a268e31" id="docx-image-rId18"
+                        data-part-id="rId18" /></div>
+                </p>
+                <p><span style="font-weight: bold">Example:</span><br />Magtis Electric tested 1,000 light bulbs
+                    overnight. If 20 bulbs failed, the failure rate is:</p>
+                <p style="text-align: center">
+                <div><img alt="A black line with numbers&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/eb11a44f-10bc-465a-8612-44aa1598ab1c" id="docx-image-rId19"
+                        data-part-id="rId19" /></div>
+                </p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading2">2. Failure Rate (λ)</p>
+                <p>The <span style="font-weight: bold">failure rate</span>, denoted by λ, represents the rate at which a
+                    product or system fails over time. It applies to both repairable and non-repairable items and is
+                    typically expressed as failures per unit time.</p>
+                <p>
+                <div><img alt="null" src="blob:http://192.168.0.104:8081/b76f93d5-879d-45c7-81c8-670821a44452"
+                        id="docx-image-rId20" data-part-id="rId20" /></div>
+                </p>
+                <p><span style="font-weight: bold">Example:</span><br />Magtis Electric tested 30 hair dryers designed
+                    to operate continuously for 1,000 hours. If 10 units failed at various times, the failure rate can
+                    be calculated using the total operating time and the number of failures.</p>
+                <p>
+                <div><img alt="null" src="blob:http://192.168.0.104:8081/3370986b-4305-4443-becf-ba07ebcaec15"
+                        id="docx-image-rId21" data-part-id="rId21" /></div>
+                </p>
+                <p>Based on the above failure data, the failure rate of this product is: </p>
+                <p><span style="font-weight: bold">
+                        <div><img alt="null" src="blob:http://192.168.0.104:8081/77287c51-0e1b-484d-bd9d-3bb176e4ba6b"
+                                id="docx-image-rId22" data-part-id="rId22" /></div>
+                    </span></p>
+                <p style="text-align: center"></p>
+                <p>The above number does not reveal a meaningful measure of the reliability of this product for its
+                    user. The users buy this product because they expect the product to last for 1000 hours if used
+                    continuously. Using the failure rate, however, a more meaningful reliability measure can be obtained
+                    in terms of MTTF and MTBF. These two measures are reviewed in more detail. </p>
+                <p>Note: The raw failure rate alone may not provide meaningful insight for users. More informative
+                    metrics, such as MTTF and MTBF, are derived from it.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading2">3. Mean Time to Failure (MTTF)</p>
+                <p><span style="font-weight: bold">MTTF</span> is used for <span
+                        style="font-weight: bold">non-repairable items</span> (e.g., batteries, light bulbs). It
+                    represents the average time until failure and is calculated as:</p>
+                <p style="text-align: center">
+                <div><img alt="A black text with black text&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/01ed056c-c28a-4891-8b46-7dc2767b6f43" id="docx-image-rId23"
+                        data-part-id="rId23" /></div>
+                </p>
+                <p>This metric helps estimate how long a product is expected to function before failing.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading2">4. Mean Time Between Failures (MTBF)</p>
+                <p><span style="font-weight: bold">MTBF</span> applies to <span style="font-weight: bold">repairable
+                        systems</span> (e.g., refrigerators, industrial machines). It measures the average time between
+                    successive failures, including the time taken for fault diagnosis and repair. </p>
+                <p>
+                <div><img alt="A diagram of a repair process&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/35342386-07ee-42ed-9911-5d69f8c789bc" id="docx-image-rId24"
+                        data-part-id="rId24" /></div>
+                </p>
+                <p></p>
+                <p><span style="font-weight: bold">Source for figure: </span><a
+                        href="https://toolsense.io/maintenance/mttf-vs-mtbf/"><span class="docx_hyperlink"
+                            style="font-weight: bold">https://toolsense.io/maintenance/mttf-vs-mtbf/</span></a></p>
+                <p>The formula is:</p>
+                <p><span style="font-weight: bold">
+                        <div><img alt="A black and white text&#10;&#10;AI-generated content may be incorrect."
+                                src="blob:http://192.168.0.104:8081/d37da0e9-16eb-4f31-a964-13ef196c74ef"
+                                id="docx-image-rId26" data-part-id="rId26" /></div>
+                    </span></p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Relationship Between MTBF/MTTF and Failure Rate</span></p>
+                <p>Both MTTF and MTBF are statistical predictions based on historical data. They do not guarantee
+                    failure-free operation but provide useful estimates of expected performance. Importantly, they
+                    are <span style="font-weight: bold">inversely related</span> to the failure rate:</p>
+                <p>
+                <div><img alt="null" src="blob:http://192.168.0.104:8081/93bf8d11-645c-4b89-b7d5-db632b16ed83"
+                        id="docx-image-rId27" data-part-id="rId27" /></div>​</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Example Revisited: Hair Dryer Reliability</span></p>
+                <p>If the failure rate λ = 0.000394, then:</p>
+                <p>
+                <div><img alt="A black lines with numbers&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/e921e363-f1cb-4278-a72b-964e084c23f0" id="docx-image-rId28"
+                        data-part-id="rId28" /></div>
+                </p>
+                <p>This means the average time between failures for the hair dryer is approximately <span
+                        style="font-weight: bold">2,538 hours</span>. If customer expectations exceed this value, the
+                    manufacturer may need to revise the design. If expectations are lower, the product has exceeded
+                    performance standards. (Haney, 2021)</p>
+                <p>For further explanation, refer to this instructional video:</p>
+                <p>
+                <div><img alt="What is MTBF and How to Calculate | Mean Time Between Failure"
+                        src="blob:http://192.168.0.104:8081/28480e9c-a375-455f-9520-4433da750c7d" id="docx-image-rId30"
+                        data-part-id="rId30" /></div>
+                </p>
+                <p>(LeanVlog, 2023)</p>
+                <p class="docx_heading1">Maintenance</p>
+                <p>As established in previous sections, all products, systems, and machinery are susceptible to failure
+                    over time. To prevent or delay such failures, <span
+                        style="font-weight: bold">maintenance</span> plays a critical role in ensuring continued
+                    functionality and operational reliability.</p>
+                <p><span style="font-weight: bold">Maintenance</span> encompasses all activities aimed at keeping
+                    equipment and systems in working order. It includes both <span style="font-weight: bold">preventive
+                        measures</span>, designed to avoid failures before they occur, and <span
+                        style="font-weight: bold">reactive measures</span>, which address issues after a failure has
+                    taken place. The overarching goal is to sustain performance, extend asset life, and minimize
+                    downtime.</p>
+                <p>Effective maintenance management depends on a firm’s ability to:</p>
+                <ol>
+                    <li><span style="font-weight: bold">Establish and foster a maintenance culture</span></li>
+                </ol>
+                <ul>
+                    <li>Promoting awareness, accountability, and proactive behaviour across all levels of the
+                        organization.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Adopt an appropriate maintenance strategy</span></li>
+                </ol>
+                <ul>
+                    <li>Selecting the right mix of preventive, predictive, and corrective approaches based on asset
+                        criticality and operational context.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Align maintenance practices with reliability goals</span></li>
+                </ol>
+                <ul>
+                    <li>Ensuring that maintenance activities directly support the reliability targets of systems and
+                        equipment.</li>
+                </ul>
+                <p>These foundational concepts will be explored in the following sections to provide a comprehensive
+                    understanding of maintenance as a strategic function within operations management.</p>
+                <p>These concepts will be briefly examined in the following sections.</p>
+                <p class="docx_heading2">Maintenance Culture</p>
+                <p>A strong <span style="font-weight: bold">maintenance culture</span> is foundational to achieving high
+                    levels of equipment reliability and operational excellence. It extends beyond the maintenance
+                    department, requiring commitment from <span style="font-weight: bold">every employee</span>, from
+                    machine operators to senior management. In such a culture, maintenance is not viewed as a reactive
+                    task but as a shared responsibility embedded in daily operations.</p>
+                <p>This collective mindset fosters <span style="font-weight: bold">proactive </span><span
+                        style="font-weight: bold">behaviour</span>, where potential issues are anticipated, communicated
+                    early, and resolved collaboratively. Employees understand their roles in maintaining equipment
+                    health, performing basic preventive tasks, and reporting abnormalities promptly.</p>
+                <p>A well-established maintenance culture lays the groundwork for <span style="font-weight: bold">Total
+                        Productive Maintenance (TPM)</span>, which integrates principles of <span
+                        style="font-weight: bold">Total Quality Management (TQM)</span> with a strategic,
+                    organization-wide approach to maintenance.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">Key Elements of a Maintenance Culture</p>
+                <p>Employees can play essential roles in supporting maintenance management through the following
+                    behaviors:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Ownership of Equipment</span><br />Operators take responsibility
+                        for routine inspections, cleaning, and identifying early signs of wear or malfunction. This
+                        sense of ownership increases accountability and responsiveness.</li>
+                    <li><span style="font-weight: bold">Prompt Communication</span><br />Staff are encouraged to report
+                        issues immediately, helping to minimize downtime and prevent minor issues from escalating into
+                        major failures.</li>
+                    <li><span style="font-weight: bold">Collaboration Across Functions</span><br />Cross-functional
+                        communication between production and maintenance teams ensures that operational insights are
+                        shared, enabling more effective troubleshooting and planning.</li>
+                    <li><span style="font-weight: bold">Continuous Learning and Training</span><br />All employees
+                        receive training in basic maintenance practices, safety protocols, and improvement techniques.
+                        This reinforces a culture of vigilance and continuous improvement.</li>
+                </ul>
+                <p>By breaking down silos between departments, a strong maintenance culture promotes a <span
+                        style="font-weight: bold">holistic approach</span> to asset management, aligning maintenance
+                    with broader organizational goals.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">Organizational Benefits of a Strong Maintenance Culture</p>
+                <ol>
+                    <li><span style="font-weight: bold">Enhanced Capacity Utilization</span><br />Reliable equipment
+                        reduces unplanned downtime, allowing firms to operate closer to full capacity and meet
+                        production targets efficiently.</li>
+                    <li><span style="font-weight: bold">Improved Product Quality</span><br />Well-maintained machines
+                        produce more consistent outputs, reducing defects, rework, and customer complaints.</li>
+                    <li><span style="font-weight: bold">Strengthened Brand Reputation</span><br />Consistent quality and
+                        reliability enhance customer trust and satisfaction, contributing to a stronger market position
+                        and competitive advantage.</li>
+                    <li><span style="font-weight: bold">Reduced Process Variability</span><br />Stable equipment
+                        performance minimizes fluctuations in output, making it easier to meet specifications and
+                        improve process control.</li>
+                    <li><span style="font-weight: bold">Support for Continuous Improvement</span><br />Maintenance
+                        culture aligns with frameworks like <span style="font-weight: bold">TPM</span> and <span
+                            style="font-weight: bold">Lean Manufacturing</span>, encouraging regular evaluation of
+                        practices, employee-driven problem-solving, and sustained performance improvements. (Alsyouf,
+                        2007)</li>
+                </ol>
+                <p class="docx_heading2">Maintenance Strategies</p>
+                <p>Maintenance strategies form the backbone of effective <span style="font-weight: bold">asset
+                        management</span>, directly influencing operational efficiency, equipment reliability, and cost
+                    control. Selecting the appropriate mix of strategies enables organizations to extend asset life,
+                    reduce unplanned downtime, and optimize resource utilization. (Balling, 2024) (eMaint Blog Posts,
+                    2022) (Blog, 2025)</p>
+                <p>This section outlines the primary maintenance strategies commonly used across industries.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">1. Reactive Maintenance (Run-to-Failure / Corrective Maintenance)</p>
+                <p><span style="font-weight: bold">Reactive maintenance</span> involves taking corrective action only
+                    after equipment has failed or a defect has been detected. Often referred to as <span
+                        style="font-weight: bold">run-to-failure</span>, this approach is typically reserved for <span
+                        style="font-weight: bold">non-critical assets</span> where failure does not significantly impact
+                    safety, operations, or costs.</p>
+                <p><span style="font-weight: bold">Examples:</span> Light bulbs, inexpensive motors, or non-essential
+                    tools.</p>
+                <p><span style="font-weight: bold">Key Characteristics:</span></p>
+                <ul>
+                    <li>Minimal planning or upfront investment.</li>
+                    <li>Repairs or replacements occur only after failure.</li>
+                </ul>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Advantages</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Disadvantages</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Simple to implement with low administrative burden.</p>
+                        </td>
+                        <td>
+                            <p>High unpredictability and risk of costly emergency repairs.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Lower short-term costs due to maintenance being performed only when needed.</p>
+                        </td>
+                        <td>
+                            <p>Increased downtime and potential for secondary damage.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p></p>
+                        </td>
+                        <td>
+                            <p>Unsuitable for critical systems due to safety and operational risks.</p>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">2. Preventive Maintenance (PM)</p>
+                <p><span style="font-weight: bold">Preventive maintenance</span> involves performing scheduled
+                    inspections, servicing, and part replacements at predetermined intervals—either time-based (e.g.,
+                    monthly) or usage-based (e.g., after 1,000 operating hours). The goal is to <span
+                        style="font-weight: bold">prevent failures before they occur</span>.</p>
+                <p>This strategy is ideal for equipment with <span style="font-weight: bold">predictable failure
+                        patterns</span> or those subject to <span style="font-weight: bold">regulatory
+                        compliance</span> (e.g., elevators, fire alarms).</p>
+                <p><span style="font-weight: bold">Key Characteristics:</span></p>
+                <ul>
+                    <li>Maintenance is performed regardless of current equipment condition.</li>
+                    <li>Focuses on early detection of wear and tear.</li>
+                </ul>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Advantages</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Disadvantages</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Reduces breakdowns and unplanned downtime.</p>
+                        </td>
+                        <td>
+                            <p>May result in unnecessary maintenance or over-servicing.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Increases asset reliability, efficiency, and lifespan.</p>
+                        </td>
+                        <td>
+                            <p>Requires careful scheduling and documentation.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Enhances safety by addressing issues before escalation.</p>
+                        </td>
+                        <td>
+                            <p>Does not eliminate all failures.</p>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">3. Predictive Maintenance (PdM)</p>
+                <p><span style="font-weight: bold">Predictive maintenance</span> uses <span
+                        style="font-weight: bold">real-time monitoring</span>, <span style="font-weight: bold">data
+                        analytics</span>, and <span style="font-weight: bold">diagnostic tools</span> (e.g., vibration
+                    analysis, thermal imaging, sensor data) to predict when equipment is likely to fail. Maintenance is
+                    then performed <span style="font-weight: bold">only when needed</span>, based on actual asset
+                    condition.</p>
+                <p>This strategy is best suited for <span style="font-weight: bold">high-value or complex
+                        assets</span> where failures are costly or disruptive (e.g., turbines, production lines).</p>
+                <p><span style="font-weight: bold">Key Characteristics:</span></p>
+                <ul>
+                    <li>Condition-based rather than schedule-based.</li>
+                    <li>Requires investment in monitoring technologies and skilled personnel.</li>
+                </ul>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Advantages</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Disadvantages</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Minimizes downtime and avoids unnecessary maintenance.</p>
+                        </td>
+                        <td>
+                            <p>High initial cost for sensors, software, and analytics.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Maximizes asset lifespan and operational efficiency.</p>
+                        </td>
+                        <td>
+                            <p>Requires skilled staff to interpret data accurately.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Enables precise planning for parts and labor.</p>
+                        </td>
+                        <td>
+                            <p>May not be feasible for all asset types.</p>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">Condition-Based Maintenance (CBM)</p>
+                <p>A specialized form of predictive maintenance, <span style="font-weight: bold">CBM</span> triggers
+                    maintenance actions only when specific <span style="font-weight: bold">measured
+                        conditions</span> (e.g., temperature, vibration, pressure) exceed predefined thresholds. It is
+                    highly responsive and tailored to the <span style="font-weight: bold">real-time state</span> of the
+                    asset.</p>
+                <p><span style="font-weight: bold">Example:</span> A pump is serviced only when vibration levels exceed
+                    safe limits, as detected by sensors.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Strategic Integration</span></p>
+                <p>In practice, organizations often adopt a <span style="font-weight: bold">hybrid approach</span>,
+                    combining multiple strategies based on asset criticality, cost, and operational context. For
+                    example:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Reactive maintenance</span> for low-risk, low-cost assets.</li>
+                    <li><span style="font-weight: bold">Preventive maintenance</span> for moderately critical systems.
+                    </li>
+                    <li><span style="font-weight: bold">Predictive/condition-based maintenance</span> for high-value or
+                        safety-critical equipment.</li>
+                </ul>
+                <p>The following video gives a comparative review of the above maintenance strategies.</p>
+                <p>
+                <div><img alt="3 Maintenance Strategies: Which Works Best?"
+                        src="blob:http://192.168.0.104:8081/71478270-fb67-418b-9964-4760a05fa698" id="docx-image-rId32"
+                        data-part-id="rId32" /></div>
+                </p>
+                <p>(Asset Insights, 2020)</p>
+                <p class="docx_heading2">Aligning Maintenance with Reliability</p>
+                <p>As established throughout this chapter, <span style="font-weight: bold">maintenance is a key enabler
+                        of reliability</span>. The effectiveness of maintenance activities depends on how well they
+                    align with the principles of reliability engineering—namely, minimizing failure, maximizing uptime,
+                    and optimizing asset performance over time.</p>
+                <p>While various maintenance strategies offer different levels of success, two advanced approaches—<span
+                        style="font-weight: bold">Reliability-Centred Maintenance (RCM)</span> and <span
+                        style="font-weight: bold">Risk-Based Maintenance (RBM)</span>—are particularly effective in
+                    aligning maintenance with reliability goals.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">1. Reliability-Centred Maintenance (RCM)</p>
+                <p><span style="font-weight: bold">RCM</span> is a comprehensive strategy that integrates multiple
+                    maintenance approaches to optimize asset performance based on <span
+                        style="font-weight: bold">criticality, failure modes, and operational context</span>. It
+                    uses <span style="font-weight: bold">Failure Mode and Effects Analysis (FMEA)</span> to identify the
+                    most appropriate maintenance method—reactive, preventive, or predictive—for each asset.</p>
+                <p>RCM is especially valuable in industries with <span style="font-weight: bold">diverse and
+                        mission-critical assets</span>, such as utilities, pharmaceuticals, and food processing, where
+                    reliability is non-negotiable.</p>
+                <p><span style="font-weight: bold">Key Features:</span></p>
+                <ul>
+                    <li>Tailors maintenance to asset-specific risks and functions.</li>
+                    <li>Focuses on maximizing reliability while controlling costs.</li>
+                    <li>Encourages continuous improvement through feedback loops.</li>
+                </ul>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Advantages</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Disadvantages</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Highly customized, improving asset availability and safety.</p>
+                        </td>
+                        <td>
+                            <p>Requires detailed analysis and data collection.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Reduces unnecessary maintenance and optimizes resource use.</p>
+                        </td>
+                        <td>
+                            <p>Higher upfront investment in training and system design.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Supports long-term reliability and cost-efficiency.</p>
+                        </td>
+                        <td>
+                            <p>Complex to implement, especially in large organizations.</p>
+                        </td>
+                    </tr>
+                </table>
+                <p></p>
+                <p>The following video provides a brief review of reliability-centred maintenance</p>
+                <p>
+                <div><img alt="Chapter 1 - Introduction to Reliability Centered Maintenance"
+                        src="blob:http://192.168.0.104:8081/fc8c15c2-b018-4454-b106-b87290e4d9d1" id="docx-image-rId34"
+                        data-part-id="rId34" /></div>
+                </p>
+                <p>(Get Insight, 2023)</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">2. Risk-Based Maintenance (RBM)</p>
+                <p><span style="font-weight: bold">RBM</span> prioritizes maintenance activities based on the <span
+                        style="font-weight: bold">risk associated with asset failure</span>, considering both the <span
+                        style="font-weight: bold">likelihood</span> and <span
+                        style="font-weight: bold">consequences</span> of failure. Assets are ranked using <span
+                        style="font-weight: bold">risk assessment tools</span> (e.g., risk matrices), and maintenance
+                    schedules are adjusted accordingly.</p>
+                <p>This strategy is particularly effective in <span style="font-weight: bold">safety-critical or
+                        environmentally sensitive environments</span>, such as nuclear power plants, chemical
+                    processing, or aviation.</p>
+                <p><span style="font-weight: bold">Key Features:</span></p>
+                <ul>
+                    <li>Focuses resources on high-risk assets.</li>
+                    <li>Enhances safety, compliance, and operational resilience.</li>
+                    <li>Requires ongoing reassessment as conditions evolve.</li>
+                </ul>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Advantages</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Disadvantages</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Improves risk management by targeting critical assets.</p>
+                        </td>
+                        <td>
+                            <p>Depends on accurate risk and consequence analysis.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Enhances safety and regulatory compliance.</p>
+                        </td>
+                        <td>
+                            <p>Requires continuous monitoring and reassessment.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Optimizes resource allocation.</p>
+                        </td>
+                        <td>
+                            <p>May overlook low-risk assets that still impact performance.</p>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading3">Comparison of Maintenance Strategies</p>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Strategy</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Description</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Key Benefits</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Best Used For</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Reactive / Corrective</span></p>
+                        </td>
+                        <td>
+                            <p>Fix after failure</p>
+                        </td>
+                        <td>
+                            <p>Simple, low upfront cost</p>
+                        </td>
+                        <td>
+                            <p>Non-critical, low-risk assets</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Preventive</span></p>
+                        </td>
+                        <td>
+                            <p>Scheduled routine maintenance</p>
+                        </td>
+                        <td>
+                            <p>Reduces failures, predictable costs</p>
+                        </td>
+                        <td>
+                            <p>Assets with predictable wear</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Predictive</span></p>
+                        </td>
+                        <td>
+                            <p>Data-driven, real-time monitoring</p>
+                        </td>
+                        <td>
+                            <p>Optimized timing, minimized downtime</p>
+                        </td>
+                        <td>
+                            <p>High-value, critical equipment</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Condition-Based</span></p>
+                        </td>
+                        <td>
+                            <p>Based on asset condition thresholds</p>
+                        </td>
+                        <td>
+                            <p>Just-in-time, efficient</p>
+                        </td>
+                        <td>
+                            <p>Assets with variable operating conditions</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Reliability-Centered</span></p>
+                        </td>
+                        <td>
+                            <p>Combined, optimized methods</p>
+                        </td>
+                        <td>
+                            <p>Risk-based, resource-efficient</p>
+                        </td>
+                        <td>
+                            <p>Complex, critical facilities</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Risk-Based</span></p>
+                        </td>
+                        <td>
+                            <p>Prioritized by risk impact</p>
+                        </td>
+                        <td>
+                            <p>Focuses on critical assets</p>
+                        </td>
+                        <td>
+                            <p>Risk-sensitive operations</p>
+                        </td>
+                    </tr>
+                </table>
+                <p></p>
+                <p class="docx_heading1">Cost of Reliability and Maintenance</p>
+                <p>Improving reliability through maintenance inevitably incurs costs. According to fundamental economic
+                    principles, these costs must be weighed against the <span style="font-weight: bold">benefits of
+                        increased reliability</span>, such as reduced breakdowns, lower repair expenses, and improved
+                    operational continuity.</p>
+                <p>The <span style="font-weight: bold">cost dynamics</span> vary depending on the maintenance strategy
+                    employed:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Reactive maintenance</span> typically results in <span
+                            style="font-weight: bold">low prevention costs</span> but <span
+                            style="font-weight: bold">high repair costs</span>, as failures occur more frequently and
+                        often unexpectedly.</li>
+                    <li><span style="font-weight: bold">Preventive maintenance</span>, on the other hand, involves <span
+                            style="font-weight: bold">higher upfront prevention costs</span> but significantly <span
+                            style="font-weight: bold">reduces repair costs</span> by minimizing the frequency and
+                        severity of failures.</li>
+                </ul>
+                <p>The goal is to find an <span style="font-weight: bold">optimal balance</span> between these two cost
+                    components to minimize <span style="font-weight: bold">total maintenance cost</span> while achieving
+                    desired reliability levels. As illustrated in the Figure, this balance is achieved through <span
+                        style="font-weight: bold">intelligent maintenance</span>, where the <span
+                        style="font-weight: bold">total cost is minimized</span> at the point where <span
+                        style="font-weight: bold">repair and prevention costs intersect</span>.</p>
+                <p style="text-align: center">
+                <div><img alt="null" src="blob:http://192.168.0.104:8081/8a71f896-971a-4700-9024-ae6add5ce014"
+                        id="docx-image-rId35" data-part-id="rId35" /></div>
+                </p>
+                <p>(Pierre Tchakoua, 2013)</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading2">Key Considerations in Cost Balancing</p>
+                <p>Two important points must be considered when evaluating maintenance cost strategies:</p>
+                <ol>
+                    <li><span style="font-weight: bold">Variability in Cost Curves</span><br />Different preventive
+                        measures yield varying levels of failure reduction at different costs. This results in <span
+                            style="font-weight: bold">multiple prevention and repair cost curves</span>, each with its
+                        own rate of change (ΔCost / ΔBreakdown). Consequently, the <span
+                            style="font-weight: bold">balanced maintenance zone</span> may shift, producing <span
+                            style="font-weight: bold">multiple total cost curves</span> and <span
+                            style="font-weight: bold">different optimal points</span>. For simplicity, the curves shown
+                        in Figure ??? represent <span style="font-weight: bold">average cost behaviour</span>.</li>
+                    <li><span style="font-weight: bold">Accounting vs. Opportunity Costs</span><br />Traditional cost
+                        analysis often focuses on <span style="font-weight: bold">direct (accounting) costs</span>—such
+                        as labor, parts, and downtime. However, <span style="font-weight: bold">opportunity
+                            costs</span> must also be considered. These include:</li>
+                </ol>
+                <ul>
+                    <li>Lost production and delivery delays</li>
+                    <li>Customer dissatisfaction and potential loss of future sales</li>
+                    <li>Reputational damage</li>
+                    <li>Safety risks and reduced employee morale</li>
+                </ul>
+                <p>
+                <div><img alt="A comparison of a graph&#10;&#10;AI-generated content may be incorrect."
+                        src="blob:http://192.168.0.104:8081/5d10ecd8-0c6e-4f3c-afc2-e445c44ee4cf" id="docx-image-rId36"
+                        data-part-id="rId36" /></div>
+                </p>
+                <p>As shown in Figure A, increasing preventive maintenance reduces breakdowns, but beyond a certain
+                    point, the <span style="font-weight: bold">marginal benefit</span> of further prevention may not
+                    justify the rising cost. However, when <span style="font-weight: bold">opportunity costs</span> are
+                    included (Figure B), the optimal level of maintenance commitment shifts, potentially
+                    justifying <span style="font-weight: bold">zero breakdown tolerance</span> in high-stakes
+                    environments.</p>
+                <p>Note: Figures adapted from Haizer et al., with modifications.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p class="docx_heading2">Full-Cost Approach to Maintenance Decision-Making</p>
+                <p>To determine the appropriate level of maintenance investment, organizations should adopt a <span
+                        style="font-weight: bold">full-cost approach</span>, incorporating both direct and opportunity
+                    costs. This requires access to historical data on:</p>
+                <ul>
+                    <li>Breakdown frequencies and probabilities</li>
+                    <li>Repair durations and costs</li>
+                    <li>Maintenance expenditures</li>
+                </ul>
+                <p>The following example illustrates how this approach can guide decision-making between reactive and
+                    preventive maintenance strategies.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Example: Maintenance Decision for a Courier Fleet</span></p>
+                <p><span style="font-weight: bold">Scenario:</span><br />Shahab operates a courier service in London
+                    using a fleet of 10 trucks. Frequent braking and harsh road conditions cause brake callipers to
+                    seize, requiring costly repairs. He has two options:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Reactive Maintenance:</span></li>
+                    <li>Average brake repair cost: $2,000</li>
+                    <li>Downtime rental cost: $250/day</li>
+                    <li>Repair time: 0.5 days</li>
+                    <li><span style="font-weight: bold">Preventive Maintenance:</span></li>
+                    <li>Monthly contract with Bobbie (retired mechanic): $10,000</li>
+                    <li>Prevents 75% of breakdowns</li>
+                </ul>
+                <p><span style="font-weight: bold">Historical Data (24 months):</span></p>
+                <table class="first-row first-col no-vband">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <p><span style="font-weight: bold">Brake Breakdowns</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Months Observed</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Frequency</span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>0</p>
+                        </td>
+                        <td>
+                            <p>4</p>
+                        </td>
+                        <td>
+                            <p>0.165</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>1</p>
+                        </td>
+                        <td>
+                            <p>10</p>
+                        </td>
+                        <td>
+                            <p>0.42</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>2</p>
+                        </td>
+                        <td>
+                            <p>6</p>
+                        </td>
+                        <td>
+                            <p>0.25</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>3</p>
+                        </td>
+                        <td>
+                            <p>4</p>
+                        </td>
+                        <td>
+                            <p>0.165</p>
+                        </td>
+                    </tr>
+                </table>
+                <p></p>
+                <p>To answer the question, the following steps should be taken:</p>
+                <ol>
+                    <li>Determining the frequency and expected number of breakdowns based on past data</li>
+                </ol>
+                <table class="first-row first-col no-vband docx_tablegrid">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col />
+                    </colgroup>
+                    <tr style="text-align: center">
+                        <td>
+                            <p><span style="font-weight: bold">Number of brake breakdowns and Repair</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Number of months during which breakdown/repair
+                                    happened</span></p>
+                        </td>
+                        <td>
+                            <p><span style="font-weight: bold">Frequency of breakdowns</span></p>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <td>
+                            <p>0</p>
+                        </td>
+                        <td>
+                            <p>4</p>
+                        </td>
+                        <td>
+                            <p>4/24 = 0.165</p>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <td>
+                            <p>1</p>
+                        </td>
+                        <td>
+                            <p>10</p>
+                        </td>
+                        <td>
+                            <p>10/24 = 0.42</p>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <td>
+                            <p>2</p>
+                        </td>
+                        <td>
+                            <p>6</p>
+                        </td>
+                        <td>
+                            <p>6/24 = 0.25</p>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <td>
+                            <p>3</p>
+                        </td>
+                        <td>
+                            <p>4</p>
+                        </td>
+                        <td>
+                            <p>4/24 = 0.165</p>
+                        </td>
+                    </tr>
+                </table>
+                <p> </p>
+                <ol>
+                    <li>Determining the expected number of breakdowns based on past data</li>
+                </ol>
+                <p></p>
+                <p>Expected monthly # = ∑ (# of months) (associated Frequency)</p>
+                <p>  = (4) (0.165) + (10) (0.42) + (6) (0.25) + (4) (0.165)</p>
+                <p>  = 0.66 + 4.2 + 1.5 + 0.66</p>
+                <p>   = 7.02 breakdowns/month</p>
+                <ol>
+                    <li>Determining the expected breakdown repair cost based on past data</li>
+                </ol>
+                <p></p>
+                <p>Expected BD cost = (Expected # of months) (breakdown cost + rental cost)</p>
+                <p>   = (7.02) ($2,000 + 250) </p>
+                <p> = $15,795 per month</p>
+                <ol>
+                    <li>Determining the expected preventive maintenance cost based on past data</li>
+                </ol>
+                <p></p>
+                <p><span style="font-weight: bold">Expected Preventive Cost = Contract cost + expected breakdown cost
+                        with contract</span></p>
+                <p> = &amp;10,000 + (0.25) ($2000) (7.02)</p>
+                <p>   = $13,510</p>
+                <ol>
+                    <li>Selecting between Reactive and Preventive maintenance policy based on cost, Reactive Maintenance
+                        ($15,795) or Preventive Maintenance ($13,510)</li>
+                </ol>
+                <p><span style="font-weight: bold">Decision: Preventive Maintenance </span></p>
+                <p></p>
+                <p class="docx_heading1">Chapter Summary</p>
+                <p>This chapter provided a comprehensive exploration of <span style="font-weight: bold">reliability and
+                        maintenance</span> within the context of operations management. It began by emphasizing the
+                    critical role these concepts play in ensuring uninterrupted service delivery and minimizing life
+                    cycle costs for both products and services.</p>
+                <p>The chapter introduced <span style="font-weight: bold">reliability</span> as a probabilistic measure,
+                    demonstrating how system performance is influenced by the configuration of components—whether
+                    in <span style="font-weight: bold">series</span> or <span
+                        style="font-weight: bold">parallel</span>—and how <span
+                        style="font-weight: bold">redundancy</span> can significantly enhance overall system
+                    reliability.</p>
+                <p>A detailed review of <span style="font-weight: bold">maintenance strategies</span> followed,
+                    including:</p>
+                <ul>
+                    <li><span style="font-weight: bold">Reactive (Corrective) Maintenance</span></li>
+                    <li><span style="font-weight: bold">Preventive Maintenance</span></li>
+                    <li><span style="font-weight: bold">Predictive Maintenance</span></li>
+                    <li><span style="font-weight: bold">Condition-Based Maintenance</span></li>
+                    <li><span style="font-weight: bold">Reliability-Centred Maintenance (RCM)</span></li>
+                    <li><span style="font-weight: bold">Risk-Based Maintenance (RBM)</span></li>
+                </ul>
+                <p>Each strategy was discussed in terms of its application context, advantages, limitations, and
+                    suitability for different asset types and operational environments.</p>
+                <p>The chapter also addressed the <span style="font-weight: bold">economic implications</span> of
+                    maintenance decisions, highlighting the importance of balancing <span
+                        style="font-weight: bold">repair costs</span> and <span style="font-weight: bold">prevention
+                        costs</span>. It introduced the concept of <span style="font-weight: bold">opportunity
+                        costs</span>, such as lost productivity, customer dissatisfaction, and reputational damage,
+                    which are often overlooked in traditional cost analyses.</p>
+                <p>A real-world case study illustrated how historical data and cost modelling can guide the selection of
+                    an optimal maintenance strategy using a <span style="font-weight: bold">full-cost approach</span>.
+                    Comparative tables and decision frameworks throughout the chapter helped synthesize key insights and
+                    support practical application.</p>
+                <p class="docx_heading1">Descriptive End-of-Chapter Questions</p>
+                <ol>
+                    <li>Define <span style="font-weight: bold">system reliability</span> and explain how it changes in a
+                        series versus parallel configuration.</li>
+                    <li>Discuss the role of <span style="font-weight: bold">redundancy</span> in improving system
+                        reliability, providing an example.</li>
+                    <li>Explain <span style="font-weight: bold">reactive maintenance</span> and its main disadvantages.
+                    </li>
+                    <li>Summarize how <span style="font-weight: bold">preventive maintenance</span> differs from
+                        predictive and condition-based maintenance.</li>
+                    <li>Identify and describe one hidden cost of equipment breakdowns that is not directly monetary.
+                    </li>
+                    <li>Compare and contrast <span style="font-weight: bold">reliability-centred</span><span
+                            style="font-weight: bold"> maintenance</span> with risk-based maintenance.</li>
+                    <li>Why is it important to include <span style="font-weight: bold">opportunity costs</span> in a
+                        maintenance cost analysis?</li>
+                    <li>Outline the steps you would take to use <span style="font-weight: bold">historical breakdown
+                            data</span> for estimating future maintenance needs.</li>
+                    <li>Discuss how maintenance strategies might differ between a <span
+                            style="font-weight: bold">manufacturing plant</span> and a <span
+                            style="font-weight: bold">service organization</span>.</li>
+                    <li>In your own words, describe how maintenance activities relate to the overall <span
+                            style="font-weight: bold">reliability</span> of an asset.</li>
+                </ol>
+                <p class="docx_heading2">Numeric End-of-Chapter Questions</p>
+                <ol>
+                    <li>Calculate the reliability of a system with components in series: R1=0.92, R2=0.85, R3=0.70.</li>
+                    <li>For a 2-unit parallel system where each unit has reliability 0.6, compute the overall system
+                        reliability.</li>
+                    <li>Using the observed breakdown data (0, 1, 2, 3 incidents per month over 24 months), calculate the
+                        average number of breakdowns per month.</li>
+                    <li>If the average repair cost per breakdown is $1,500 and there are 8 expected breakdowns per
+                        month, what is the total monthly repair cost?</li>
+                    <li>Compare the total expected monthly costs between paying for breakdown repairs ($2,000 each,
+                        average of 6 per month) and hiring a mechanic for preventive maintenance at a rate of $10,000
+                        per month, assuming preventive maintenance prevents 75% of breakdowns.</li>
+                </ol>
+                <p class="docx_heading2">End of Chapter Questions and Problems</p>
+                <ol>
+                    <li>Define maintenance and reliability. How do they relate to each other?</li>
+                    <li>Explain the concept of Total Productive Maintenance (TPM).</li>
+                    <li>A system consists of four components in series, each with a reliability of 0.9. Calculate the
+                        system reliability.</li>
+                    <li>A machine has an MTBF of 500 hours and an MTTR of 5 hours. Calculate its availability.</li>
+                    <li>Two components are arranged in parallel, each with a reliability of 0.7. Calculate the system
+                        reliability.</li>
+                    <li>A production process has three stages with yields of 95%, 92%, and 88% respectively. What is the
+                        overall system yield?</li>
+                    <li>Compare the annual costs of preventative and reactive maintenance given the following:</li>
+                </ol>
+                <ul>
+                    <li>Preventive maintenance cost: $800 per month</li>
+                    <li>Reactive maintenance cost: $4000 per breakdown</li>
+                    <li>Average breakdowns without preventative maintenance: 2 per month</li>
+                </ul>
+                <ol>
+                    <li>Discuss the factors that should be considered when deciding between preventative and reactive
+                        maintenance strategies.</li>
+                </ol>
+                <p class="docx_heading1">Case Study: Holiday Baskets</p>
+                <p><span style="font-weight: bold">Background</span><br />Holiday Baskets is a small seasonal business
+                    specializing in the preparation and delivery of nut baskets during the Christmas season. The company
+                    was founded by Helen Hemkey, who oversees all aspects of operations—from order intake to final
+                    delivery.</p>
+                <p>The business model is simple: customers place orders for baskets containing four types of nuts—<span
+                        style="font-weight: bold">walnuts, cashews, almonds, and peanuts</span>—all of which are kept in
+                    stock. Helen receives the orders, picks the required quantities of nuts, and places them into bags
+                    along with shipping labels. These are then sent to the <span style="font-weight: bold">basketing
+                        workshop</span>, where her four employees—<span style="font-weight: bold">Dianne, Nancy, Sue,
+                        and Mariam</span>—assemble the final product.</p>
+                <ul>
+                    <li><span style="font-weight: bold">Dianne</span> works independently at Table 1.</li>
+                    <li><span style="font-weight: bold">Nancy and Sue</span> collaborate at Table 2, with Nancy starting
+                        the basket and Sue completing it.</li>
+                    <li><span style="font-weight: bold">Mariam</span> works independently at Table 3.</li>
+                </ul>
+                <p>Once assembled, the baskets are labelled and placed on the <span style="font-weight: bold">pick-up
+                        table</span> for courier delivery.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Concern 1: Quality Assurance</span></p>
+                <p>Helen has built a strong reputation for the <span style="font-weight: bold">presentation
+                        quality</span> of her baskets, specifically, that the nuts are neatly sectioned and do not mix.
+                    She aims to keep the <span style="font-weight: bold">defect rate below 2%</span>. However, based on
+                    recent observations, she estimates that each employee has a <span style="font-weight: bold">5%
+                        probability</span> of producing a disarrayed basket.</p>
+                <p><span style="font-weight: bold">Question:</span><br />Can Helen maintain her desired quality standard
+                    of <span style="font-weight: bold">98% or higher</span> for the final baskets?</p>
+                <p><span style="font-weight: bold">Analysis:</span><br />Let’s assume the probability that each basket
+                    is correctly assembled is:</p>
+                <p>Pcorrect​=0.95</p>
+                <p>The probability that <span style="font-weight: bold">all three workstations</span> (Dianne, Nancy,
+                    Sue, and Mariam) produce a correct basket is:</p>
+                <p>Psystem success​=0.95×0.95×0.95=0.857375</p>
+                <p>However, we must consider the <span style="font-weight: bold">complement</span>—the probability
+                    that <span style="font-weight: bold">at least one</span> basket is disarrayed. The probability
+                    that <span style="font-weight: bold">all three</span> produce a disarrayed basket is:</p>
+                <p>Pall fail​=(1−0.95)3=0.000125</p>
+                <p>Thus, the probability that <span style="font-weight: bold">at least one basket is correct</span> is:
+                </p>
+                <p>1−Pall fail​=1−0.000125=0.999875</p>
+                <p>✅ <span style="font-weight: bold">Conclusion:</span> Yes, Helen can maintain her quality standard.
+                    The probability that the baskets are correctly assembled exceeds <span
+                        style="font-weight: bold">99.98%</span>, which is well above her 98% threshold.</p>
+                <p>
+                <div><svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+                        <rect width="100%" height="100%" fill="#424242" />
+                    </svg></div>
+                </p>
+                <p><span style="font-weight: bold">Concern 2: Delivery Reliability</span></p>
+                <p>Helen strives for <span style="font-weight: bold">next-day delivery</span> and uses <span
+                        style="font-weight: bold">multiple courier companies</span> to increase the likelihood of
+                    on-time delivery. Each courier has a <span style="font-weight: bold">70% probability</span> of
+                    delivering on time. She wants to know how many <span style="font-weight: bold">independent
+                        couriers</span>, each carrying an identical set of orders, are needed to achieve <span
+                        style="font-weight: bold">at least 99% confidence</span> in next-day delivery.</p>
+                <p><span style="font-weight: bold">Let’s define:</span></p>
+                <ul>
+                    <li>P=0.70P=0.70 (probability of success per courier)</li>
+                    <li>n = number of couriers</li>
+                    <li>We want:</li>
+                </ul>
+                <p>Pat least one success​≥0.99</p>
+                <p>1−(1−P)n≥0.99⇒(1−P)n≤0.01</p>
+                <p>(1−0.70)n≤0.01⇒(0.30)n≤0.01</p>
+                <p>Solving:</p>
+                <ul>
+                    <li>n=1: 0.300.30</li>
+                    <li>n=2: 0.090.09</li>
+                    <li>n=3: 0.0270.027</li>
+                    <li>n=4: 0.00810.0081</li>
+                </ul>
+                <p>✅ <span style="font-weight: bold">Conclusion:</span> Helen needs to use <span
+                        style="font-weight: bold">at least 4 courier companies</span>, each carrying the same set of
+                    orders, to achieve <span style="font-weight: bold">99% confidence</span> in next-day delivery.</p>
+                <p></p>
+                <p class="docx_heading1">Solutions to Questions: </p>
+                <p>Descriptive Questions</p>
+                <ol>
+                    <li><span style="font-weight: bold">Define system reliability and explain how it changes in a series
+                            versus parallel configuration.</span></li>
+                </ol>
+                <ul>
+                    <li><span style="font-weight: bold">System reliability</span> is the probability that a system will
+                        perform its intended function without failure for a specified period under stated conditions. In
+                        a series configuration, all components must work for the system to work; thus, system
+                        reliability decreases as more components are added (Rs = R1 × R2 × ... × Rn). In a parallel
+                        configuration, the system operates as long as at least one component works, so overall
+                        reliability increases with redundancy because backup units reduce the probability of total
+                        failure.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Discuss the role of redundancy in improving system reliability,
+                            providing an example.</span></li>
+                </ol>
+                <ul>
+                    <li><span style="font-weight: bold">Redundancy</span> adds backup components to mitigate failures.
+                        For example, in a 2-unit parallel system (such as two pumps), even if one fails, the other can
+                        keep the system operational. This significantly improves the overall system reliability, as
+                        illustrated: Rs = R1 + (R2 × (1 - R1)). For R1 = R2 = 0.7, Rs = 0.91, which is much higher than
+                        the reliability of a single component.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Explain reactive maintenance and its main disadvantages.</span>
+                    </li>
+                </ol>
+                <ul>
+                    <li><span style="font-weight: bold">Reactive maintenance</span> involves repairing equipment after a
+                        failure occurs. Its main disadvantages are unpredictability, potential for expensive emergency
+                        repairs, risk of unexpected downtime, secondary damage to equipment, and possible safety
+                        hazards.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Summarize how preventive maintenance differs from predictive and
+                            condition-based maintenance.</span></li>
+                </ol>
+                <ul>
+                    <li><span style="font-weight: bold">Preventive maintenance (PM)</span> is scheduled at regular
+                        intervals regardless of actual equipment condition, intending to minimize breakdowns. <span
+                            style="font-weight: bold">Predictive maintenance</span> uses real-time monitoring and data
+                        analytics to anticipate failures and schedule maintenance precisely when needed. <span
+                            style="font-weight: bold">Condition-based maintenance</span> tracks physical conditions
+                        (like vibration or temperature), triggering maintenance only when certain thresholds are met.
+                        Preventive is time-based; predictive and condition-based are data- or condition-driven.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Identify and describe one hidden cost of equipment breakdowns
+                            that is not directly monetary.</span></li>
+                </ol>
+                <ul>
+                    <li>One significant <span style="font-weight: bold">hidden cost</span> is the adverse effect on
+                        customer relations due to production delays and missed deliveries, which can lead to future
+                        sales loss and damage to the company's reputation.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Compare and contrast reliability-centred maintenance with
+                            risk-based maintenance.</span></li>
+                </ol>
+                <ul>
+                    <li><span style="font-weight: bold">Reliability-centred maintenance</span> focuses on maximizing
+                        asset availability and operational safety by analyzing failure modes and their effects,
+                        optimizing maintenance tasks accordingly. <span style="font-weight: bold">Risk-based
+                            maintenance</span> prioritizes resources toward assets where the risk and potential
+                        consequences of failure are greatest, aiming for overall risk reduction and safety assurance.
+                        Both are data-driven, but risk-based is more focused on consequence rather than availability.
+                    </li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Why is it important to include opportunity costs in a
+                            maintenance cost analysis?</span></li>
+                </ol>
+                <ul>
+                    <li><span style="font-weight: bold">Opportunity costs</span> (like lost production revenue or
+                        customer goodwill during downtime) can far exceed direct repair expenses. Including them leads
+                        to better-informed decisions and a more accurate assessment of the true maintenance impact on
+                        business performance.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Outline the steps you would take to use historical breakdown
+                            data for estimating future maintenance needs.</span></li>
+                </ol>
+                <ul>
+                    <li>Collect breakdown records over a set period; tally the frequency of different breakdown counts
+                        per unit time; calculate probabilities and average breakdown rate; use this data to estimate
+                        expected future occurrences and costs, informing maintenance strategy selection.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">Discuss how maintenance strategies might differ between a
+                            manufacturing plant and a service organization.</span></li>
+                </ol>
+                <ul>
+                    <li>In <span style="font-weight: bold">manufacturing</span>, preventive and predictive maintenance
+                        are crucial to avoid costly downtime and maintain consistent output. In <span
+                            style="font-weight: bold">service organizations</span>—where equipment might be less
+                        critical to core offerings—reactive or simple preventive strategies may suffice, unless
+                        machinery directly affects service delivery.</li>
+                </ul>
+                <ol>
+                    <li><span style="font-weight: bold">In your own words, describe how maintenance activities relate to
+                            the overall reliability of an asset.</span></li>
+                </ol>
+                <ul>
+                    <li>Maintenance helps detect, prevent, and fix failures, maintaining or restoring assets to peak
+                        reliability. The right strategy reduces breakdown frequency, extends asset life, and ensures the
+                        asset consistently meets operational requirements.</li>
+                </ul>
+                <p>Numeric Questions and Solutions</p>
+                <ol>
+                    <li><span style="font-weight: bold">Calculate the reliability of a system with components in series:
+                            R1 = 0.92, R2 = 0.85, R3 = 0.70.</span></li>
+                </ol>
+                <p>Rs=R1×R2×R3=0.92×0.85×0.70=0.5462</p>
+                <p><span style="font-weight: bold">Reliability:</span> 0.5462 or 54.62%1.</p>
+                <ol>
+                    <li><span style="font-weight: bold">For a 2-unit parallel system where each unit has reliability
+                            0.6, compute the overall system reliability.</span></li>
+                </ol>
+                <p>Rs=R1+(R2×(1−R1))=0.6+(0.6×(1−0.6))=0.6+(0.6×0.4)=0.6+0.24=0.84</p>
+                <p><span style="font-weight: bold">Reliability:</span> 0.84 or 84%1.</p>
+                <ol>
+                    <li><span style="font-weight: bold">Using the observed breakdown data (0, 1, 2, 3 incidents per
+                            month over 24 months), calculate the average number of breakdowns per month.</span></li>
+                </ol>
+                <p>Using data from example:</p>
+                <p>Breakdown frequencies:</p>
+                <ul>
+                    <li>0 breakdowns: 4 months</li>
+                    <li>1 breakdown: 10 months</li>
+                    <li>2 breakdowns: 6 months</li>
+                    <li>3 breakdowns: 4 months</li>
+                </ul>
+                <p>Average=24(0×4)+(1×10)+(2×6)+(3×4)=240+10+12+12=2434=1.4167</p>
+                <p><span style="font-weight: bold">Average:</span> 1.42 breakdowns per month (rounded)1.</p>
+                <ol>
+                    <li><span style="font-weight: bold">If the average repair cost per breakdown is $1,500 and there are
+                            8 expected breakdowns per month, what is the total monthly repair cost?</span></li>
+                </ol>
+                <p>Total monthly cost=8×$1,500=$12,000</p>
+                <p><span style="font-weight: bold">Total monthly repair cost:</span> $12,000.</p>
+                <ol>
+                    <li><span style="font-weight: bold">Compare the total expected monthly costs between paying for
+                            breakdown repairs ($2,000 each, average of 6 per month) and hiring a mechanic for preventive
+                            maintenance at a rate of $10,000 per month, assuming preventive maintenance prevents 75% of
+                            breakdowns.</span></li>
+                </ol>
+                <p><span style="font-weight: bold">Reactive approach:</span></p>
+                <p>Monthly Cost=6×$2,000=$12,000</p>
+                <p><span style="font-weight: bold">Preventive approach:</span></p>
+                <ul>
+                    <li>Prevents 75% of breakdowns → Only 25% remain: 6×0.25=1.56×0.25=1.5 breakdowns per month.</li>
+                    <li>Breakdown repair cost: 1.5×$2,000=$3,0001.5×$2,000=$3,000</li>
+                    <li>Mechanic salary: $10,000</li>
+                </ul>
+                <p>Total=$10,000+$3,000=$13,000</p>
+                <p><span style="font-weight: bold">Comparison:</span></p>
+                <ul>
+                    <li>Reactive: $12,000/month (higher risk, more breakdowns)</li>
+                    <li>Preventive: $13,000/month (lower risk, fewer breakdowns, improved reliability)</li>
+                </ul>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </article>
+        </section>
+    </div>
+</div>

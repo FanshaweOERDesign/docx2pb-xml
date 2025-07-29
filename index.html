@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DOCX to Pressbooks XML Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            background-image: url(images/fanshawe_wallpaper.jpg);
+        }
+
+        .wrap {
+            width: 60%;
+            text-align: center;
+            background-color: #f7f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        h1 {
+            margin-top: 2rem;
+            color: #333;
+        }
+
+        .dropzone {
+            margin: 2rem 0;
+            border: 2px dashed #0074d9;
+            background: #fff;
+            border-radius: 8px;
+            width: 350px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0074d9;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .dropzone.dragover {
+            background: #e6f7ff;
+            border-color: #005fa3;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-info {
+            margin: 1rem 0;
+            color: #555;
+        }
+
+        #downloadBtn {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #downloadBtn:disabled {
+            background: #b3d7f5;
+            cursor: not-allowed;
+        }
+
+        #preview {
+            margin-top: 1rem;
+            width: 80%;
+            max-width: 800px;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        #previewContainer {
+            display: none;
+
+            h3 {
+                text-align: center;
+            }
+        }
+
+        #logo {
+            width: 74px;
+        }
+
+        #logo-div {
+            text-align: center;
+            margin-top: 2vh;
+        }
+
+        footer {
+            text-align: center;
+            color: #fff;
+            margin-top: 1rem;
+        }
+
+        footer a {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>DOCX to Pressbooks XML Converter</h1>
+        <input type="text" id="chapterTitle" placeholder="Enter Chapter Title"
+            style="width: 350px; padding: 0.5rem; margin-bottom: 1rem;">
+        <input type="text" id="sampleImageURL" placeholder="Enter Sample Image URL from your Pressbook"
+            style="width: 350px; padding: 0.5rem; margin-bottom: 1rem;">
+        <div class="dropzone" id="dropzone">
+            <span>Drop your .docx file here or <label for="fileInput"
+                    style="color:#0074d9; text-decoration:underline; cursor:pointer;">browse</label></span>
+            <input type="file" id="fileInput" accept=".docx">
+        </div>
+        <!--<textarea class="file-info" id="fileInfo"></textarea>-->
+        <button id="downloadBtn">Download Pressbooks XML</button>
+        <div id="previewContainer">
+            <h3>Page Preview</h3>
+            <div id="preview"></div>
+        </div>
+    </div>
+    <div id="logo-div">
+        <img id="logo" src="images/oer_logo.png" />
+    </div>
+    <footer>
+        <div>DOCX to Pressbooks XML Converter by Jason Benoit and the Fanshawe OER Design Studio is
+            open source software made available under the <a href="https://choosealicense.com/licenses/mit/">MIT
+                License</a>.</div>
+    </footer>
+    <script src="./jszip.min.js"></script>
+    <script src="./docx-preview.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script type="module">
+        import xmlbuilder from 'https://cdn.jsdelivr.net/npm/xmlbuilder2@3.0.2/+esm';
+        import he from 'https://cdn.jsdelivr.net/npm/he@1.2.0/+esm';
+
+        const { create } = xmlbuilder;
+        window.addEventListener('DOMContentLoaded', () => {
+
+
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            //const fileInfo = document.getElementById('fileInfo');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            let selectedFile = null;
+
+            dropzone.addEventListener('click', () => fileInput.click());
+
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('dragover');
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files && files.length > 0) {
+                    const file = files[0];
+                    if (file.name.endsWith('.docx')) {
+                        selectedFile = file;
+                        //fileInfo.textContent = `Selected file: ${selectedFile.name}`;
+                        processDocx(selectedFile);
+                    } else {
+                        //fileInfo.textContent = "Please upload a .docx file.";
+                        alert("Please upload a .docx file.");
+                        selectedFile = null;
+                        downloadBtn.style.display = 'none';
+                    }
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file && file.name.endsWith('.docx')) {
+                    selectedFile = file;
+                    //fileInfo.textContent = `Selected file: ${selectedFile.name}`;
+                    processDocx(selectedFile);
+                } else {
+                    //fileInfo.textContent = "Please select a valid .docx file.";
+                    alert("Please select a valid .docx file.");
+                    selectedFile = null;
+                    downloadBtn.style.display = 'none';
+                }
+            });
+
+            function cleanStyleAttributes(element) {
+                const allowedStyles = ['font-weight', 'text-align'];
+
+                element.querySelectorAll('[style]').forEach(el => {
+                    const style = el.getAttribute('style');
+                    const cleaned = style
+                        .split(';')
+                        .map(s => s.trim())
+                        .filter(s => {
+                            const [prop] = s.split(':').map(part => part.trim());
+                            return allowedStyles.includes(prop);
+                        })
+                        .join('; ');
+
+                    if (cleaned) {
+                        el.setAttribute('style', cleaned);
+                    } else {
+                        el.removeAttribute('style');
+                    }
+                });
+            }
+
+            function unwrapUnstyledSpans(root) {
+                root.querySelectorAll('span').forEach(span => {
+                    const style = span.getAttribute('style');
+                    const hasMeaningfulStyle = style && style.trim() !== '';
+
+                    if (!hasMeaningfulStyle) {
+                        const parent = span.parentNode;
+                        while (span.firstChild) {
+                            parent.insertBefore(span.firstChild, span);
+                        }
+                        parent.removeChild(span);
+                    }
+                });
+            }
+
+            const buildPressbooksXML = (subsections, chapterTitle) => {
+                const channelItems = [];
+
+                const taxonomy = {
+                    'wp:term': {
+                        'wp:term_id': 1,
+                        'wp:term_taxonomy': 'chapter-type',
+                        'wp:term_slug': 'standard',
+                        'wp:term_name': 'Standard'
+                    }
+                };
+
+                const partId = chapterTitle => {
+                    return `part-${chapterTitle.toLowerCase().replace(/\s+/g, '-')}${Date.now()}`;
+                };
+                const part = {
+                    id: partId(chapterTitle),
+                    slug: chapterTitle.toLowerCase().replace(/\s+/g, '-'),
+                    order: 0
+                };
+                const book = {
+                    title: 'Sample Book Title',
+                    slug: 'sample-book',
+                    // parts: [part] // Uncomment if parts are available
+                };
+                channelItems.push({
+                    item: {
+                        title: { '#cdata': chapterTitle },
+                        link: `https://example.pressbooks.pub/example/part/example-part/`,
+                        pubDate: new Date().toUTCString(),
+                        'dc:creator': 'admin',
+                        guid: {
+                            '@isPermaLink': 'false',
+                            '#': `https://example.pressbooks.pub/example/?p=${part.id}`
+                        },
+                        description: '',
+                        'content:encoded': { '#cdata': '' },
+                        'excerpt:encoded': { '#cdata': '' },
+                        'wp:post_id': part.id,
+                        'wp:post_date': '2025-06-30 00:00:00',
+                        'wp:post_date_gmt': '2025-06-30 00:00:00',
+                        'wp:post_name': part.slug,
+                        'wp:status': 'publish',
+                        'wp:post_parent': 0,
+                        'wp:menu_order': part.order,
+                        'wp:post_type': 'part',
+                        'wp:is_sticky': 0
+                    }
+                });
+
+                // Chapters
+                subsections.forEach(chapter => {
+                    console.log(`Processing chapter: ${chapter.title}`);
+
+                    channelItems.push({
+                        item: {
+                            title: { '#cdata': chapter.title },
+                            link: `https://example.pressbooks.pub/${book.slug}/chapter/${chapter.slug}/`,
+                            pubDate: new Date().toUTCString(),
+                            'dc:creator': 'admin',
+                            guid: {
+                                '@isPermaLink': 'false',
+                                '#': `https://example.pressbooks.pub/${book.slug}/?p=${chapter.id}`
+                            },
+                            description: '',
+                            'content:encoded': { '#cdata': he.decode(chapter.content) },
+                            'excerpt:encoded': { '#cdata': '' },
+                            'wp:post_id': chapter.id,
+                            'wp:post_date': '2025-06-30 00:00:00',
+                            'wp:post_date_gmt': '2025-06-30 00:00:00',
+                            'wp:post_name': chapter.slug,
+                            'wp:status': 'web-only',
+                            'wp:post_parent': part.id,
+                            'wp:menu_order': chapter.order,
+                            'wp:post_type': 'chapter',
+                            'wp:is_sticky': 0,
+                            category: {
+                                '@domain': 'chapter-type',
+                                '@nicename': 'standard',
+                                '#': 'Standard'
+                            }
+                        }
+                    });
+                });
+
+                const xmlObj = {
+                    rss: {
+                        '@version': '2.0',
+                        '@xmlns:excerpt': 'http://wordpress.org/export/1.2/excerpt/',
+                        '@xmlns:content': 'http://purl.org/rss/1.0/modules/content/',
+                        '@xmlns:dc': 'http://purl.org/dc/elements/1.1/',
+                        '@xmlns:wp': 'http://wordpress.org/export/1.2/',
+                        channel: {
+                            title: book.title,
+                            link: `https://example.pressbooks.pub/${book.slug}`,
+                            description: `Imported version of ${book.title}`,
+                            language: 'en-US',
+                            'wp:wxr_version': '1.2',
+                            'wp:base_site_url': 'https://example.pressbooks.pub/',
+                            'wp:base_blog_url': `https://example.pressbooks.pub/${book.slug}`,
+                            ...taxonomy,
+                            item: channelItems.map(i => i.item)
+                        }
+                    }
+                };
+
+                const doc = create(xmlObj);
+                return doc.end({ prettyPrint: true });
+            };
+
+            function parseDocxListTypesFromStyles(styleNodes) {
+                const result = {};
+
+                styleNodes.forEach(styleNode => {
+                    if (!styleNode.textContent.includes('p.docx-num-')) return;
+
+                    const cssText = styleNode.textContent;
+                    const ruleRegex = /p\.docx-num-(\d+-\d+):before\s*{[^}]*content:\s*([^;]+);/g;
+                    let match;
+
+                    while ((match = ruleRegex.exec(cssText)) !== null) {
+                        const classSuffix = match[1]; // e.g., '2-0'
+                        const content = match[2].trim();
+
+                        const className = `docx-num-${classSuffix}`;
+                        const isOrdered = content.includes('counter(') || content.includes('decimal');
+
+                        result[className] = isOrdered ? 'ordered' : 'unordered';
+                    }
+                });
+
+                return result;
+            }
+
+            function convertListTypes(rootElement, listTypes) {
+                const paragraphs = Array.from(rootElement.querySelectorAll('p'));
+
+                let currentList = null;
+                let lastListParent = null;
+                let lastListGroup = null;
+
+                paragraphs.forEach(p => {
+                    const className = Array.from(p.classList).find(c => c.startsWith('docx-num-'));
+                    if (!className || !listTypes[className]) {
+                        // Reset list tracking if non-list element is found
+                        currentList = null;
+                        lastListParent = null;
+                        lastListGroup = null;
+                        return;
+                    }
+
+                    const listGroup = className.split('-')[2]; // e.g., "2" from docx-num-2-0
+                    const listType = listTypes[className]; // 'ordered' or 'unordered'
+                    const listTag = listType === 'ordered' ? 'ol' : 'ul';
+
+                    if (!currentList || listTag !== currentList.tagName.toLowerCase() || listGroup !== lastListGroup) {
+                        // Start a new list
+                        currentList = document.createElement(listTag);
+                        p.parentNode.insertBefore(currentList, p);
+                        lastListParent = p.parentNode;
+                        lastListGroup = listGroup;
+                    }
+
+                    const li = document.createElement('li');
+                    li.innerHTML = p.innerHTML;
+                    currentList.appendChild(li);
+                    p.remove(); // Remove original <p>
+                });
+            }
+
+            function createChapters(root) {
+                const chapters = [];
+                const children = Array.from(root.querySelector('article').children);
+                console.log("Creating chapters from children:", children.length);
+                let currentChapter = null;
+
+                let currentChapterOrder = 0;
+                let currentChapterId = 100;
+
+                children.forEach(child => {
+                    if (child.classList.contains('docx_heading1')) {
+                        if (currentChapter) {
+                            chapters.push(currentChapter);
+                        }
+                        currentChapter = {
+                            title: child.textContent.trim(),
+                            slug: child.textContent.trim().toLowerCase().replace(/\s+/g, '-'),
+                            content: '',
+                            order: currentChapterOrder++,
+                            id: currentChapterId++
+                        };
+                    } else if (currentChapter) {
+                        // convert other heading levels to HTML headings
+
+                        if (child.classList.contains('docx_heading2')) {
+                            currentChapter.content += `<h2>${child.textContent.trim()}</h2>`;
+
+                        } else if (child.classList.contains('docx_heading3')) {
+                            currentChapter.content += `<h3>${child.textContent.trim()}</h3>`;
+                        } else if (child.classList.contains('docx_heading4')) {
+                            currentChapter.content += `<h4>${child.textContent.trim()}</h4>`;
+                        } else if (child.classList.contains('docx_heading5')) {
+                            currentChapter.content += `<h5>${child.textContent.trim()}</h5>`;
+                        } else if (child.classList.contains('docx_heading6')) {
+                            currentChapter.content += `<h6>${child.textContent.trim()}</h6>`;
+                        } else if (child.classList.contains('docx_text')) {
+                            currentChapter.content += `<p>${child.textContent.trim()}</p>`;
+                        } else {
+                            currentChapter.content += child.outerHTML;
+                        }
+                    }
+                });
+                if (currentChapter) {
+                    chapters.push(currentChapter);
+                }
+
+                return chapters;
+            }
+
+            function extractBookId(url) {
+                const match = url.match(/\/sites\/(\d+)\//);
+                return match ? match[1] : null;
+            }
+
+
+            // Placeholder for actual DOCX processing logic
+            async function processDocx(file) {
+                // Example only: simulate processing delay
+                //fileInfo.textContent += " (processing...)";
+                // check to ensure all fields are filled out
+                const chapterTitle = document.getElementById('chapterTitle').value.trim();
+                const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
+                if (!chapterTitle || !sampleImageURL) {
+                    alert("Please fill out both Chapter Title and Sample Image URL fields.");
+                    return;
+                }
+                const preview = document.getElementById('preview');
+                const imageMap = {};
+                const arrayBuffer = await file.arrayBuffer();
+                const observer = new MutationObserver(mutations => {
+                    mutations.forEach(mutation => {
+                        mutation.addedNodes.forEach(node => {
+                            if (node.tagName === 'IMG' && node.src) {
+                                const entry = Object.entries(imageMap).find(([, v]) => v.url === node.src);
+                                if (entry) {
+                                    const [partId] = entry;
+                                    node.id = `docx-image-${partId}`;
+                                    node.setAttribute('data-part-id', partId);
+                                }
+                            }
+                        });
+                    });
+                });
+
+                const imagePromises = [];
+
+                observer.observe(preview, { childList: true, subtree: true });
+                await docx.renderAsync(arrayBuffer, preview, null, {
+
+
+                    onImage: async (partId, img) => {
+                        const promise = (async () => {
+                            img.setAttribute('id', `docx-image-${partId}`);
+                            img.setAttribute('data-part-id', partId);
+                            imageMap[partId] = { img };
+                        })();
+                        imagePromises.push(promise);
+                        return promise;
+                    }
+
+                });
+
+                await Promise.all(imagePromises);
+
+                async function convertBlobToJpeg(blob) {
+                    const img = await createImageBitmap(blob);
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    return new Promise((resolve) => {
+                        canvas.toBlob((jpegBlob) => {
+                            resolve(jpegBlob);
+                        }, 'image/jpeg', 0.95); // quality: 95%
+                    });
+                }
+
+
+                requestIdleCallback(async () => {
+                    // Remove styles and TOC elements
+                    const listTypes = parseDocxListTypesFromStyles(preview.querySelectorAll('style'));
+                    const styleLinks = preview.querySelectorAll('link[rel="stylesheet"], style');
+                    styleLinks.forEach(style => {
+                        style.remove();
+                    });
+
+                    const toc_elements = preview.querySelectorAll('.docx_tocheading, .docx_toc1, .docx_toc2, .docx_toc3');
+                    toc_elements.forEach(el => {
+                        el.remove();
+                    });
+
+
+                    convertListTypes(preview, listTypes);
+                    const elements = preview.querySelectorAll('*');
+                    elements.forEach(el => {
+                        cleanStyleAttributes(el);
+                        if (el.tagName === 'P' && el.classList.contains('docx_text')) {
+                            el.classList.remove('docx_text');
+                        }
+                    });
+                    unwrapUnstyledSpans(preview);
+                    const serializer = new XMLSerializer();
+                    const html = serializer.serializeToString(preview);
+                    //fileInfo.value = html;
+                    const previewContainer = document.getElementById('previewContainer');
+                    previewContainer.style.display = 'block';
+
+                    downloadBtn.style.display = 'inline-block';
+                    downloadBtn.disabled = false;
+                    const previewClone = preview.cloneNode(true);
+                    const zip = new JSZip();
+
+                    async function detectImageType(blob) {
+                        const buffer = await blob.slice(0, 8).arrayBuffer();
+                        const bytes = new Uint8Array(buffer);
+
+                        // PNG: 89 50 4E 47 0D 0A 1A 0A
+                        if (
+                            bytes[0] === 0x89 &&
+                            bytes[1] === 0x50 &&
+                            bytes[2] === 0x4E &&
+                            bytes[3] === 0x47
+                        ) return 'png';
+
+                        // JPEG: FF D8 FF
+                        if (bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF) return 'jpg';
+
+                        // GIF: 47 49 46 38
+                        if (bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x38) return 'gif';
+
+                        // WEBP: starts with RIFF....WEBP
+                        if (
+                            bytes[0] === 0x52 && // 'R'
+                            bytes[1] === 0x49 && // 'I'
+                            bytes[2] === 0x46 && // 'F'
+                            bytes[3] === 0x46 &&
+                            bytes[8] === 0x57 && // 'W'
+                            bytes[9] === 0x45 && // 'E'
+                            bytes[10] === 0x42 && // 'B'
+                            bytes[11] === 0x50    // 'P'
+                        ) return 'webp';
+
+                        return 'bin'; // fallback
+                    }
+
+
+                    const imagePromises = Object.values(imageMap).map(async (entry) => {
+                        const response = await fetch(entry.img.src);
+                        const blob = await response.blob();
+
+                        // Detect extension from blob content
+                        const extension = await detectImageType(blob);
+                        const originalName = entry.img.src.split('/').pop() || 'image';
+                        const baseName = originalName.replace(/\.\w+$/, '').replace(/%20/g, '_');
+
+                        const filename = `${baseName}.${extension}`;
+                        entry.filename = filename;
+
+                        const file = new File([blob], filename, { type: blob.type || 'application/octet-stream' });
+                        zip.file(`images/${filename}`, file);
+                    });
+                    await Promise.all(imagePromises);
+
+                    previewClone.querySelectorAll('img').forEach(img => {
+                        const partId = img.getAttribute('data-part-id');
+                        if (partId) {
+                            const entry = imageMap[partId];
+                            if (entry && entry.filename) {
+                                const now = new Date();
+
+                                const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
+                                const domainString = `https://ecampusontario.pressbooks.pub/app/uploads/sites/${extractBookId(sampleImageURL)}/${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/`;
+                                img.src = domainString + entry.filename;
+                            }
+                            img.removeAttribute('data-part-id'); // Clean up attribute
+                            img.removeAttribute('id'); // Clean up ID
+                            img.removeAttribute('data-part-id'); // Clean up attribute
+                        }
+                    });
+
+                    const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+                    // You would generate the XML blob here and hook it up to the downloadBtn
+                    // Example:
+                    const subsections = createChapters(previewClone);
+                    const xml = buildPressbooksXML(subsections, chapterTitle);
+                    zip.file('pressbooks.xml', xml); // Add XML to the zip
+
+                    const finalZipBlob = await zip.generateAsync({ type: 'blob' });
+                    const zipUrl = URL.createObjectURL(finalZipBlob);
+
+                    downloadBtn.onclick = () => {
+                        const a = document.createElement('a');
+                        a.href = zipUrl;
+                        a.download = 'project.zip'; // Include both images and XML
+                        a.click();
+                        URL.revokeObjectURL(zipUrl);
+                    };
+                });
+
+            };
+        });
+    </script>
+</body>
+
+</html>
