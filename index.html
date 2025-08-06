@@ -228,10 +228,8 @@
         const { create } = xmlbuilder;
         window.addEventListener('DOMContentLoaded', () => {
 
-
             const dropzone = document.getElementById('dropzone');
             const fileInput = document.getElementById('fileInput');
-            //const fileInfo = document.getElementById('fileInfo');
             const downloadBtn = document.getElementById('downloadBtn');
 
             let selectedFile = null;
@@ -255,10 +253,8 @@
                     const file = files[0];
                     if (file.name.endsWith('.docx')) {
                         selectedFile = file;
-                        //fileInfo.textContent = `Selected file: ${selectedFile.name}`;
                         processDocx(selectedFile);
                     } else {
-                        //fileInfo.textContent = "Please upload a .docx file.";
                         alert("Please upload a .docx file.");
                         selectedFile = null;
                         downloadBtn.style.display = 'none';
@@ -270,10 +266,8 @@
                 const file = e.target.files[0];
                 if (file && file.name.endsWith('.docx')) {
                     selectedFile = file;
-                    //fileInfo.textContent = `Selected file: ${selectedFile.name}`;
                     processDocx(selectedFile);
                 } else {
-                    //fileInfo.textContent = "Please select a valid .docx file.";
                     alert("Please select a valid .docx file.");
                     selectedFile = null;
                     downloadBtn.style.display = 'none';
@@ -340,7 +334,6 @@
                 const book = {
                     title: 'Sample Book Title',
                     slug: 'sample-book',
-                    // parts: [part] // Uncomment if parts are available
                 };
                 channelItems.push({
                     item: {
@@ -541,11 +534,9 @@
                 return match ? match[1] : null;
             }
 
-
             // Placeholder for actual DOCX processing logic
             async function processDocx(file) {
-                // Example only: simulate processing delay
-                //fileInfo.textContent += " (processing...)";
+
                 // check to ensure all fields are filled out
                 const chapterTitle = document.getElementById('chapterTitle').value.trim();
                 const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
@@ -633,7 +624,6 @@
                     unwrapUnstyledSpans(preview);
                     const serializer = new XMLSerializer();
                     const html = serializer.serializeToString(preview);
-                    //fileInfo.value = html;
                     const previewContainer = document.getElementById('previewContainer');
                     previewContainer.style.display = 'block';
 
@@ -712,8 +702,6 @@
 
                     const zipBlob = await zip.generateAsync({ type: 'blob' });
 
-                    // You would generate the XML blob here and hook it up to the downloadBtn
-                    // Example:
                     const subsections = createChapters(previewClone);
                     const xml = buildPressbooksXML(subsections, chapterTitle);
                     zip.file('pressbooks.xml', xml); // Add XML to the zip
@@ -729,7 +717,6 @@
                         URL.revokeObjectURL(zipUrl);
                     };
                 });
-
             };
         });
     </script>
