@@ -169,9 +169,9 @@
     <div class="wrap">
         <h1>DOCX to Pressbooks XML Converter</h1>
         <input type="text" id="chapterTitle" placeholder="Enter Chapter Title"
-            style="width: 350px; padding: 0.5rem; margin-bottom: 1rem;">
+            style="width: 350px; padding: 0.5rem; margin-bottom: 1rem;" maxlength="70">
         <input type="text" id="sampleImageURL" placeholder="Enter Sample Image URL from your Pressbook"
-            style="width: 350px; padding: 0.5rem; margin-bottom: 1rem;">
+            style="width: 350px; padding: 0.5rem; margin-bottom: 1rem;" maxlength="500">
         <div class="dropzone" id="dropzone">
             <span>Drop your .docx file here or <label for="fileInput"
                     style="color:#0074d9; text-decoration:underline; cursor:pointer;">browse</label></span>
@@ -221,6 +221,7 @@
     <script src="./jszip.min.js"></script>
     <script src="./docx-preview.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="./purify.min.js"></script>
     <script type="module">
         import xmlbuilder from 'https://cdn.jsdelivr.net/npm/xmlbuilder2@3.0.2/+esm';
         import he from 'https://cdn.jsdelivr.net/npm/he@1.2.0/+esm';
@@ -534,12 +535,18 @@
                 return match ? match[1] : null;
             }
 
+            function clientSideLimits(input, maxLength = 1000) {
+                return input
+                    .slice(0, maxLength)
+                    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ''); // Remove problematic chars
+            }
+
             // Placeholder for actual DOCX processing logic
             async function processDocx(file) {
 
                 // check to ensure all fields are filled out
-                const chapterTitle = document.getElementById('chapterTitle').value.trim();
-                const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
+                const chapterTitle = DOMPurify.sanitize(clientSideLimits(document.getElementById('chapterTitle').value.trim()));
+                const sampleImageURL = clientSideLimits(document.getElementById('sampleImageURL').value.trim());
                 if (!chapterTitle || !sampleImageURL) {
                     alert("Please fill out both Chapter Title and Sample Image URL fields.");
                     return;
@@ -664,7 +671,6 @@
 
                         return 'bin'; // fallback
                     }
-
 
                     const imagePromises = Object.values(imageMap).map(async (entry) => {
                         const response = await fetch(entry.img.src);
