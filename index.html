@@ -338,7 +338,7 @@
                 };
                 channelItems.push({
                     item: {
-                        title: { '#cdata': chapterTitle },
+                        title: { '$': chapterTitle },
                         link: `https://example.pressbooks.pub/example/part/example-part/`,
                         pubDate: new Date().toUTCString(),
                         'dc:creator': 'admin',
@@ -347,8 +347,8 @@
                             '#': `https://example.pressbooks.pub/example/?p=${part.id}`
                         },
                         description: '',
-                        'content:encoded': { '#cdata': '' },
-                        'excerpt:encoded': { '#cdata': '' },
+                        'content:encoded': { '$': '' },
+                        'excerpt:encoded': { '$': '' },
                         'wp:post_id': part.id,
                         'wp:post_date': '2025-06-30 00:00:00',
                         'wp:post_date_gmt': '2025-06-30 00:00:00',
@@ -367,7 +367,7 @@
 
                     channelItems.push({
                         item: {
-                            title: { '#cdata': chapter.title },
+                            title: { '$': chapter.title },
                             link: `https://example.pressbooks.pub/${book.slug}/chapter/${chapter.slug}/`,
                             pubDate: new Date().toUTCString(),
                             'dc:creator': 'admin',
@@ -376,8 +376,8 @@
                                 '#': `https://example.pressbooks.pub/${book.slug}/?p=${chapter.id}`
                             },
                             description: '',
-                            'content:encoded': { '#cdata': he.decode(chapter.content) },
-                            'excerpt:encoded': { '#cdata': '' },
+                            'content:encoded': { '$': he.decode(chapter.content) },
+                            'excerpt:encoded': { '$': '' },
                             'wp:post_id': chapter.id,
                             'wp:post_date': '2025-06-30 00:00:00',
                             'wp:post_date_gmt': '2025-06-30 00:00:00',
