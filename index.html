@@ -695,22 +695,6 @@
                             const entry = imageMap[partId];
                             if (entry && entry.filename) {
                                 const now = new Date();
-
-                                const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
-                                const domainString = `https://ecampusontario.pressbooks.pub/app/uploads/sites/${extractBookId(sampleImageURL)}/${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/`;
-                                img.src = domainString + entry.filename;
-                            }
-                            img.removeAttribute('data-part-id'); // Clean up attribute
-                            img.removeAttribute('id'); // Clean up ID
-                            img.removeAttribute('data-part-id'); // Clean up attribute
-                        }
-                    });
-
-                    const zipBlob = await zip.generateAsync({ type: 'blob' });
-
-                    const subsections = createChapters(previewClone);
-                    const xml = buildPressbooksXML(subsections, chapterTitle);
-                    zip.file('pressbooks.xml', xml); // Add XML to the zip
                                 const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
                                 let rootUrl;
 
@@ -721,7 +705,22 @@
                                     rootUrl = 'https://ecampusontario.pressbooks.pub';
                                 }
 
-                                const domainString = `${rootUrl}
+                                const domainString = `${rootUrl}/app/uploads/sites/${extractBookId(sampleImageURL)}/${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/`;
+                                img.src = domainString + entry.filename;
+                            }
+                            img.removeAttribute('data-part-id'); // Clean up attribute
+                            img.removeAttribute('id'); // Clean up ID
+                        }
+                    });
+
+                    const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+                    const subsections = createChapters(previewClone);
+                    const xml = buildPressbooksXML(subsections, chapterTitle);
+                    zip.file('pressbooks.xml', xml); // Add XML to the zip
+
+                    const finalZipBlob = await zip.generateAsync({ type: 'blob' });
+                    const zipUrl = URL.createObjectURL(finalZipBlob);
 
                     downloadBtn.onclick = () => {
                         const a = document.createElement('a');

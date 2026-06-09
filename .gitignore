@@ -1,0 +1,3 @@
+# Ignore temporary syntax check files generated during validation
+temp_module.js
+temp_inline.js
