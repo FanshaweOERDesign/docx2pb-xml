@@ -711,9 +711,17 @@
                     const subsections = createChapters(previewClone);
                     const xml = buildPressbooksXML(subsections, chapterTitle);
                     zip.file('pressbooks.xml', xml); // Add XML to the zip
+                                const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
+                                let rootUrl;
 
-                    const finalZipBlob = await zip.generateAsync({ type: 'blob' });
-                    const zipUrl = URL.createObjectURL(finalZipBlob);
+                                try {
+                                    const parsed = new URL(sampleImageURL);
+                                    rootUrl = `${parsed.protocol}//${parsed.host}`;
+                                } catch (err) {
+                                    rootUrl = 'https://ecampusontario.pressbooks.pub';
+                                }
+
+                                const domainString = `${rootUrl}
 
                     downloadBtn.onclick = () => {
                         const a = document.createElement('a');
