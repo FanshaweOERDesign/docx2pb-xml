@@ -696,19 +696,22 @@
                             if (entry && entry.filename) {
                                 const now = new Date();
                                 const sampleImageURL = document.getElementById('sampleImageURL').value.trim();
-                                
-                                //const domainString = `https://ecampusontario.pressbooks.pub/app/uploads/sites/${extractBookId(sampleImageURL)}/${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/`;
-
-                                let rootUrl;
+                                let rootUrl = 'https://ecampusontario.pressbooks.pub';
+                                let uploadPathPrefix = '/app/uploads/sites';
 
                                 try {
                                     const parsed = new URL(sampleImageURL);
                                     rootUrl = `${parsed.protocol}//${parsed.host}`;
+
+                                    const pathMatch = parsed.pathname.match(/^(.*\/sites\/\d+)\/\d{4}\/\d{2}\//);
+                                    if (pathMatch) {
+                                        uploadPathPrefix = pathMatch[1];
+                                    }
                                 } catch (err) {
-                                    rootUrl = 'https://ecampusontario.pressbooks.pub';
+                                    // keep fallback values
                                 }
 
-                                const domainString = `${rootUrl}/app/uploads/sites/${extractBookId(sampleImageURL)}/${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/`;
+                                const domainString = `${rootUrl}${uploadPathPrefix}/${now.getFullYear()}/${(now.getMonth() + 1).toString().padStart(2, '0')}/`;
                                 img.src = domainString + entry.filename;
                             }
                             img.removeAttribute('data-part-id'); // Clean up attribute
